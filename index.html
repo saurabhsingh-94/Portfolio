@@ -613,7 +613,7 @@ body {
                         <p>When I'm not pushing Solidity contracts to testnet or auditing smart contract security, I'm exploring the latest in the Hedera ecosystem and crafting tools that push the boundaries of what's possible in DeFi.</p>
                     </div>
                     <p class="mission-statement" style="margin-top: 1.2rem;">"I believe decentralization is a superpower and I'm here to build that power — one smart contract at a time."</p>
-                    <a href="resume.html" target="_blank" class="cyber-btn" style="display: inline-block; margin-top: 1.5rem; font-size: 0.8rem;">DOWNLOAD RESUME &#x2193;</a>
+                    <button onclick="openWindow('win-resume')" class="cyber-btn" style="display: inline-block; margin-top: 1.5rem; font-size: 0.8rem; cursor:pointer;">VIEW RESUME &#x2193;</button>
                 </div>
             </div>
         </div>
@@ -780,6 +780,192 @@ body {
                         </div>
                     </a>
                 </div>
+            </div>
+        </div>
+
+        <!-- RESUME WINDOW -->
+        <div class="os-window hidden" id="win-resume" style="width: min(900px, 95vw); max-height: 90vh;">
+            <div class="os-window-header" data-draghandle="win-resume" style="justify-content: space-between;">
+                <div class="os-title">resume.dat // SAURABH KUMAR SINGH</div>
+                <div style="display:flex; gap:0.75rem; align-items:center;">
+                    <button onclick="window.print()" style="font-family:var(--font-mono); font-size:0.72rem; padding:0.2rem 0.6rem; background:rgba(8,247,254,0.1); border:1px solid var(--border-dim); color:var(--cyber-cyan); cursor:pointer;">&#x2B07; PRINT</button>
+                    <div class="os-close" onclick="closeWindow('win-resume')">X</div>
+                </div>
+            </div>
+            <div class="os-window-content" style="font-family:'Inter',sans-serif; background:#0a0e1a; padding:2rem;">
+
+                <!-- Resume Header -->
+                <div style="display:grid; grid-template-columns:1fr auto; gap:1.5rem; align-items:start; padding-bottom:1.5rem; border-bottom:1px solid rgba(99,179,237,0.15); margin-bottom:2rem;">
+                    <div>
+                        <h2 style="font-size:2rem; font-weight:700; background:linear-gradient(135deg,#e2e8f0 0%,#63b3ed 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Saurabh Kumar Singh</h2>
+                        <div style="display:inline-flex; align-items:center; gap:0.4rem; margin-top:0.5rem; font-family:var(--font-mono); font-size:0.8rem; color:#63b3ed; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); padding:0.25rem 0.7rem; border-radius:4px;">&#x25B8; Blockchain Developer</div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.4rem; font-size:0.8rem; color:#94a3b8;">
+                        <a href="https://www.linkedin.com/in/saurabhsingh98" target="_blank" style="color:#94a3b8; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">linkedin.com/in/saurabhsingh98</a>
+                        <a href="https://github.com/saurabhsingh-98" target="_blank" style="color:#94a3b8; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">github.com/saurabhsingh-98</a>
+                        <span>rsaurabhsingh84@gmail.com</span>
+                        <span>Vadodara, Gujarat, India</span>
+                    </div>
+                </div>
+
+                <!-- Objective -->
+                <div style="margin-bottom:2rem;">
+                    <div style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:#63b3ed; margin-bottom:1rem; display:flex; align-items:center; gap:0.75rem;">Objective <span style="flex:1; height:1px; background:linear-gradient(to right,rgba(99,179,237,0.4),transparent);"></span></div>
+                    <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-left:3px solid #63b3ed; border-radius:8px; padding:1.2rem 1.4rem; font-size:0.9rem; color:#94a3b8; line-height:1.75;">Passionate B.Tech CSE student specializing in Blockchain technology, on a mission to become a leading Web3 architect. I live and breathe decentralized systems, smart contract security, and distributed protocols — bridging the gap between cryptography and real-world application. Eager to contribute to cutting-edge blockchain and Web3 projects through an internship or junior engineering role.</div>
+                </div>
+
+                <!-- Education -->
+                <div style="margin-bottom:2rem;">
+                    <div style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:#63b3ed; margin-bottom:1rem; display:flex; align-items:center; gap:0.75rem;">Education <span style="flex:1; height:1px; background:linear-gradient(to right,rgba(99,179,237,0.4),transparent);"></span></div>
+                    <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:1.2rem 1.4rem; display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;">
+                        <div>
+                            <div style="font-size:1rem; font-weight:600; color:#e2e8f0;">Bachelor of Technology &mdash; Computer Science &amp; Engineering</div>
+                            <div style="font-family:var(--font-mono); font-size:0.75rem; color:#63b3ed; margin-top:0.2rem;">// Specialization: Blockchain Technology</div>
+                            <div style="font-size:0.85rem; color:#94a3b8; margin-top:0.25rem;">Parul University of Engineering &amp; Technology &nbsp;&middot;&nbsp; Vadodara, Gujarat</div>
+                        </div>
+                        <div style="text-align:right; flex-shrink:0;">
+                            <div style="font-size:0.8rem; color:#64748b;">2022 &ndash; 2026</div>
+                            <div style="display:inline-block; margin-top:0.3rem; padding:0.18rem 0.5rem; background:rgba(104,211,145,0.1); border:1px solid rgba(104,211,145,0.3); border-radius:4px; font-size:0.7rem; font-family:var(--font-mono); color:#68d391;">&#x25CF; IN PROGRESS</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div style="margin-bottom:2rem;">
+                    <div style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:#63b3ed; margin-bottom:1rem; display:flex; align-items:center; gap:0.75rem;">Technical Skills <span style="flex:1; height:1px; background:linear-gradient(to right,rgba(99,179,237,0.4),transparent);"></span></div>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem;">
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:1rem 1.2rem;">
+                            <div style="font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#63b3ed; margin-bottom:0.75rem; padding-bottom:0.4rem; border-bottom:1px dashed rgba(99,179,237,0.15);">Blockchain / Web3</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:0.35rem;">
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">Hedera Hashgraph</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">DAG Architecture</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">HCS &amp; HTS</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">EVM Contracts</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">Solidity</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">DeFi Protocols</span>
+                            </div>
+                        </div>
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:1rem 1.2rem;">
+                            <div style="font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#63b3ed; margin-bottom:0.75rem; padding-bottom:0.4rem; border-bottom:1px dashed rgba(99,179,237,0.15);">Languages</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:0.35rem;">
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.25); color:#68d391;">Python</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.25); color:#68d391;">JavaScript</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.25); color:#68d391;">C++</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.25); color:#68d391;">Rust</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.25); color:#68d391;">Java</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.25); color:#68d391;">SQL</span>
+                            </div>
+                        </div>
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:1rem 1.2rem;">
+                            <div style="font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#63b3ed; margin-bottom:0.75rem; padding-bottom:0.4rem; border-bottom:1px dashed rgba(99,179,237,0.15);">Security / Tools</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:0.35rem;">
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(252,129,129,0.08); border:1px solid rgba(252,129,129,0.3); color:#fc8181;">Cybersecurity</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(252,129,129,0.08); border:1px solid rgba(252,129,129,0.3); color:#fc8181;">OSINT</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(183,148,244,0.08); border:1px solid rgba(183,148,244,0.25); color:#b794f4;">SAML Auth</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(183,148,244,0.08); border:1px solid rgba(183,148,244,0.25); color:#b794f4;">Hardhat</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(183,148,244,0.08); border:1px solid rgba(183,148,244,0.25); color:#b794f4;">Git / GitHub</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.75rem; background:rgba(183,148,244,0.08); border:1px solid rgba(183,148,244,0.25); color:#b794f4;">AI / LLM Tools</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects -->
+                <div style="margin-bottom:2rem;">
+                    <div style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:#63b3ed; margin-bottom:1rem; display:flex; align-items:center; gap:0.75rem;">Projects <span style="flex:1; height:1px; background:linear-gradient(to right,rgba(99,179,237,0.4),transparent);"></span></div>
+                    <div style="display:flex; flex-direction:column; gap:1rem;">
+
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:1.2rem 1.4rem; position:relative; overflow:hidden;">
+                            <div style="position:absolute; left:0; top:0; bottom:0; width:3px; background:#68d391;"></div>
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:0.5rem;">
+                                <div>
+                                    <div style="display:inline-flex; align-items:center; gap:0.3rem; font-family:var(--font-mono); font-size:0.7rem; margin-bottom:0.4rem; color:#68d391;"><span style="width:6px; height:6px; border-radius:50%; background:#68d391; box-shadow:0 0 6px #68d391; display:inline-block;"></span>ACTIVE</div>
+                                    <div style="font-size:1rem; font-weight:600; color:#e2e8f0;">Crypto Portfolio Tracker</div>
+                                </div>
+                                <a href="https://github.com/saurabhsingh-98/crypto-portfolio-tracker" target="_blank" style="font-family:var(--font-mono); font-size:0.7rem; color:#63b3ed; text-decoration:none; border:1px solid rgba(99,179,237,0.4); padding:0.18rem 0.5rem; border-radius:4px; white-space:nowrap;">View on GitHub &#x2197;</a>
+                            </div>
+                            <p style="font-size:0.87rem; color:#94a3b8; line-height:1.65; margin-bottom:0.8rem;">Comprehensive tracking system for cryptocurrency assets with real-time price feeds and Hedera Hashgraph network integration. Leverages HTS for on-chain asset management.</p>
+                            <div style="display:flex; flex-wrap:wrap; gap:0.35rem;">
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">Hedera Hashgraph</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.25); color:#68d391;">JavaScript</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">HTS</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">HCS</span>
+                            </div>
+                        </div>
+
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:1.2rem 1.4rem; position:relative; overflow:hidden;">
+                            <div style="position:absolute; left:0; top:0; bottom:0; width:3px; background:#f6c90e;"></div>
+                            <div style="margin-bottom:0.5rem;">
+                                <div style="display:inline-flex; align-items:center; gap:0.3rem; font-family:var(--font-mono); font-size:0.7rem; margin-bottom:0.4rem; color:#f6c90e;"><span style="width:6px; height:6px; border-radius:50%; background:#f6c90e; box-shadow:0 0 6px #f6c90e; display:inline-block;"></span>IN DEVELOPMENT</div>
+                                <div style="font-size:1rem; font-weight:600; color:#e2e8f0;">DeFi Smart Contract Suite</div>
+                            </div>
+                            <p style="font-size:0.87rem; color:#94a3b8; line-height:1.65; margin-bottom:0.8rem;">A robust suite of EVM-compatible DeFi contracts including AMM, staking vault, and governance — deployed on Hedera Testnet via Hardhat. Full test coverage across all modules.</p>
+                            <div style="display:flex; flex-wrap:wrap; gap:0.35rem;">
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(183,148,244,0.08); border:1px solid rgba(183,148,244,0.25); color:#b794f4;">Solidity</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(183,148,244,0.08); border:1px solid rgba(183,148,244,0.25); color:#b794f4;">Hardhat</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">EVM</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); color:#63b3ed;">Hedera Testnet</span>
+                            </div>
+                        </div>
+
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:1.2rem 1.4rem; position:relative; overflow:hidden;">
+                            <div style="position:absolute; left:0; top:0; bottom:0; width:3px; background:#f6c90e;"></div>
+                            <div style="margin-bottom:0.5rem;">
+                                <div style="display:inline-flex; align-items:center; gap:0.3rem; font-family:var(--font-mono); font-size:0.7rem; margin-bottom:0.4rem; color:#f6c90e;"><span style="width:6px; height:6px; border-radius:50%; background:#f6c90e; box-shadow:0 0 6px #f6c90e; display:inline-block;"></span>BUILDING</div>
+                                <div style="font-size:1rem; font-weight:600; color:#e2e8f0;">Automated Recon &amp; Vulnerability Scanner</div>
+                            </div>
+                            <p style="font-size:0.87rem; color:#94a3b8; line-height:1.65; margin-bottom:0.8rem;">A Python utility for automating initial reconnaissance on security research targets — subdomain enumeration, endpoint discovery, and vulnerability fingerprinting.</p>
+                            <div style="display:flex; flex-wrap:wrap; gap:0.35rem;">
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.25); color:#68d391;">Python</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(252,129,129,0.08); border:1px solid rgba(252,129,129,0.3); color:#fc8181;">Cybersecurity</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(252,129,129,0.08); border:1px solid rgba(252,129,129,0.3); color:#fc8181;">OSINT</span>
+                                <span style="padding:0.18rem 0.5rem; border-radius:4px; font-size:0.73rem; background:rgba(104,211,145,0.08); border:1px solid rgba(104,211,145,0.25); color:#68d391;">Automation</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div style="margin-bottom:2rem;">
+                    <div style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:#63b3ed; margin-bottom:1rem; display:flex; align-items:center; gap:0.75rem;">Certifications <span style="flex:1; height:1px; background:linear-gradient(to right,rgba(99,179,237,0.4),transparent);"></span></div>
+                    <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:0.9rem 1.2rem; display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <div>
+                                <div style="font-size:0.9rem; font-weight:500; color:#e2e8f0;">Hedera Hashgraph Developer Certification</div>
+                                <div style="font-size:0.78rem; color:#64748b; margin-top:0.12rem;">The Hashgraph Association</div>
+                            </div>
+                            <a href="https://certs.hashgraphdev.com/92db9258-f373-4efe-b061-5fea3058149a.pdf" target="_blank" style="font-family:var(--font-mono); font-size:0.7rem; text-decoration:none; color:#63b3ed; border:1px solid rgba(99,179,237,0.4); padding:0.18rem 0.5rem; border-radius:4px; white-space:nowrap;">Verify &#x2197;</a>
+                        </div>
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:0.9rem 1.2rem; display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <div>
+                                <div style="font-size:0.9rem; font-weight:500; color:#e2e8f0;">HackerRank — Problem Solving</div>
+                                <div style="font-size:0.78rem; color:#64748b; margin-top:0.12rem;">HackerRank</div>
+                            </div>
+                            <a href="https://www.hackerrank.com/certificates/144acd11f6c7" target="_blank" style="font-family:var(--font-mono); font-size:0.7rem; text-decoration:none; color:#63b3ed; border:1px solid rgba(99,179,237,0.4); padding:0.18rem 0.5rem; border-radius:4px; white-space:nowrap;">Verify &#x2197;</a>
+                        </div>
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:0.9rem 1.2rem; display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <div>
+                                <div style="font-size:0.9rem; font-weight:500; color:#e2e8f0;">HackerRank — Python</div>
+                                <div style="font-size:0.78rem; color:#64748b; margin-top:0.12rem;">HackerRank</div>
+                            </div>
+                            <a href="https://www.hackerrank.com/certificates/688d1c350b17" target="_blank" style="font-family:var(--font-mono); font-size:0.7rem; text-decoration:none; color:#63b3ed; border:1px solid rgba(99,179,237,0.4); padding:0.18rem 0.5rem; border-radius:4px; white-space:nowrap;">Verify &#x2197;</a>
+                        </div>
+                        <div style="background:#0f1628; border:1px solid rgba(99,179,237,0.15); border-radius:8px; padding:0.9rem 1.2rem; display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <div>
+                                <div style="font-size:0.9rem; font-weight:500; color:#e2e8f0;">HackerRank — SQL</div>
+                                <div style="font-size:0.78rem; color:#64748b; margin-top:0.12rem;">HackerRank</div>
+                            </div>
+                            <a href="https://www.hackerrank.com/certificates/6e050a64949e" target="_blank" style="font-family:var(--font-mono); font-size:0.7rem; text-decoration:none; color:#63b3ed; border:1px solid rgba(99,179,237,0.4); padding:0.18rem 0.5rem; border-radius:4px; white-space:nowrap;">Verify &#x2197;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interests -->
+                <div style="padding-top:1.5rem; border-top:1px solid rgba(99,179,237,0.15); text-align:center; font-family:var(--font-mono); font-size:0.72rem; color:#64748b;">
+                    Open to Internships &amp; Collaborations &nbsp;&middot;&nbsp; <span style="color:#63b3ed;">rsaurabhsingh84@gmail.com</span>
+                </div>
+
             </div>
         </div>
 
