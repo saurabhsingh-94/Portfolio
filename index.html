@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYS.BOOT // Saurabh Kumar Singh // Dashboard</title>
-    <meta name="description" content="Cyberpunk Dashboard Portfolio of Saurabh Kumar Singh, Blockchain Developer and Bug Bounty Hunter.">
+    <meta name="description" content="Cyberpunk Dashboard Portfolio of Saurabh Kumar Singh, Blockchain Developer.">
     <!-- Google Fonts: Share Tech Mono for code/boot, Rajdhani/Chakra Petch for UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,8 @@ body {
     color: var(--text-primary);
     font-family: var(--font-ui);
     height: 100vh;
-    overflow: hidden; /* Lock scroll, it's a dashboard */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 @media (min-width: 768px) {
@@ -92,7 +93,9 @@ body {
 
 /* === MAIN DASHBOARD UI === */
 .main-dashboard {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    position: relative; /* Changed from absolute to allow scroll */
+    min-height: 100vh;
+    width: 100%;
     display: flex; flex-direction: column; 
     /* Hexagon background pattern for the desktop */
     background-image: 
@@ -123,6 +126,12 @@ body {
     gap: 3rem; padding: 4rem 10%; align-content: center;
     perspective: 1000px; /* For 3D Tilt */
 }
+/* On large screens, reserve space on the right for the cloud monitor (280px + 2rem*2 ~= 316px) */
+@media (min-width: 1200px) {
+    .dashboard-grid {
+        padding-right: calc(310px + 2rem);
+    }
+}
 
 /* Dashboard Modules (Buttons) */
 .dash-module {
@@ -152,11 +161,121 @@ body {
 .module-title { font-size: 1.5rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
 .module-sub { font-family: var(--font-mono); color: var(--text-dim); font-size: 0.9rem; }
 
-/* Module Hover States */
-.dash-module:hover { border-color: var(--cyber-cyan); box-shadow: 0 0 20px rgba(8,247,254,0.15); }
-.dash-module:hover::before { opacity: 1; box-shadow: 0 0 10px var(--cyber-cyan); }
-.dash-module:hover .module-bg { opacity: 1; }
-.dash-module:hover .module-icon { transform: scale(1.1); }
+/* Module Hover States (Only on hover-capable devices) */
+@media (hover: hover) and (pointer: fine) {
+    .dash-module:hover { border-color: var(--cyber-cyan); box-shadow: 0 0 20px rgba(8,247,254,0.15); }
+    .dash-module:hover::before { opacity: 1; box-shadow: 0 0 10px var(--cyber-cyan); }
+    .dash-module:hover .module-bg { opacity: 1; }
+    .dash-module:hover .module-icon { transform: scale(1.1); }
+}
+
+/* ========================================== */
+/* CLOUD MONITOR                              */
+/* ========================================== */
+.cloud-monitor {
+    position: fixed;
+    top: 5.5rem;
+    right: 1.5rem;
+    width: 260px;
+    background: rgba(1, 4, 16, 0.88);
+    border: 1px solid var(--border-dim);
+    border-left: 2px solid rgba(8, 247, 254, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 40;
+    padding: 1.2rem 1.2rem 1.4rem;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    box-shadow: inset 0 0 20px rgba(8, 247, 254, 0.03), 0 4px 30px rgba(0,0,0,0.7);
+}
+.monitor-title {
+    font-size: 0.78rem;
+    color: var(--cyber-cyan);
+    border-bottom: 1px solid rgba(8, 247, 254, 0.2);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+.monitor-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    padding: 0.1rem 0;
+}
+.monitor-label {
+    color: rgba(125, 211, 252, 0.65);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+}
+.monitor-value {
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    text-align: right;
+    word-break: break-all;
+}
+.monitor-value.green {
+    color: var(--cyber-green);
+    text-shadow: 0 0 6px rgba(0, 255, 65, 0.7);
+}
+.monitor-divider {
+    height: 1px;
+    background: rgba(8, 247, 254, 0.12);
+    width: 100%;
+    margin: 0.1rem 0;
+}
+.cpu-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 255, 65, 0.12);
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+}
+.cpu-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--cyber-green);
+    transition: width 0.25s ease-out, background-color 0.4s ease;
+    box-shadow: 0 0 8px var(--cyber-green);
+    border-radius: 2px;
+}
+.connect-links {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.3rem;
+}
+.connect-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.35rem 0.2rem;
+    font-size: 0.7rem;
+    color: var(--cyber-cyan);
+    border: 1px solid rgba(8, 247, 254, 0.25);
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+@media (hover: hover) and (pointer: fine) {
+    .connect-btn:hover {
+        background: rgba(8, 247, 254, 0.15);
+        box-shadow: 0 0 10px rgba(8, 247, 254, 0.3);
+        border-color: var(--cyber-cyan);
+    }
+}
+
+@media (max-width: 1200px) {
+    .cloud-monitor { display: none; }
+}
 
 /* Footer */
 .dash-footer {
@@ -170,14 +289,16 @@ body {
     background: transparent; transition: 0.3s; text-decoration: none;
     clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 }
-.cyber-btn:hover { background: var(--cyber-cyan); color: #000; box-shadow: 0 0 15px var(--cyber-cyan); }
+@media (hover: hover) and (pointer: fine) {
+    .cyber-btn:hover { background: var(--cyber-cyan); color: #000; box-shadow: 0 0 15px var(--cyber-cyan); }
+}
 
 
 /* ========================================== */
 /* OVERLAY WINDOWS (DRAGGABLE POPUPS)         */
 /* ========================================== */
 .windows-container {
-    position: absolute; top:0; left:0; width: 100vw; height: 100vh;
+    position: fixed; top:0; left:0; width: 100vw; height: 100vh;
     pointer-events: none; z-index: 50; overflow: hidden;
 }
 
@@ -277,8 +398,16 @@ body {
     .profile-layout { flex-direction: column; text-align: center; }
 }
 @media (max-width: 768px) {
-    .dashboard-grid { padding: 2rem 5%; grid-template-columns: 1fr; gap: 2rem; }
-    .os-window { width: 95vw; }
+    .dashboard-grid { 
+        padding: 2rem 5%; 
+        grid-template-columns: 1fr; 
+        gap: 2rem; 
+        align-content: flex-start;
+    }
+    .main-dashboard { min-height: auto; }
+    .dash-module { height: auto; padding: 2.5rem 1rem; }
+    
+    .os-window { width: 95vw; max-height: 90vh; }
     .skills-grid { grid-template-columns: 1fr; }
     .skill-sect[style*="grid-column"] { grid-column: span 1 !important; }
 }
@@ -313,7 +442,7 @@ body {
             <div class="user-identity">
                 <span class="user-icon"></span>
                 <span class="user-name">SAURABH KUMAR SINGH</span>
-                <span class="user-role cyber-text">BLOCKCHAIN_DEV // BOUNTY_HUNTER</span>
+                <span class="user-role cyber-text">BLOCKCHAIN_DEV // CSE_STUDENT</span>
             </div>
             <div class="system-time" id="sys-time">DATE: SYNCING...</div>
         </header>
@@ -368,7 +497,77 @@ body {
                 </div>
             </div>
 
+            <!-- Module 5: Let's Connect -->
+            <div class="dash-module reveal-up" style="transition-delay: 400ms;" data-tilt onclick="openWindow('win-connect')" data-magnetic>
+                <div class="module-bg"></div>
+                <div class="module-content">
+                    <div class="module-icon" style="color: var(--cyber-green);">
+                        <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <h2 class="module-title" style="color: var(--cyber-green);">[ LET'S_CONNECT ]</h2>
+                    <p class="module-sub">GitHub // LinkedIn // Email</p>
+                </div>
+            </div>
+
         </div>
+
+        <!-- Cloud Monitor Panel -->
+        <aside id="cloud-monitor" class="cloud-monitor reveal-up" style="transition-delay: 400ms;">
+            <div class="monitor-title">[ SYS_MONITOR ]</div>
+            
+            <!-- Identity Block -->
+            <div class="monitor-row">
+                <span class="monitor-label">IDENTITY</span>
+                <span class="monitor-value">S.K. SINGH</span>
+            </div>
+            <div class="monitor-row">
+                <span class="monitor-label">ROLE</span>
+                <span class="monitor-value" style="font-size:0.68rem; color: var(--text-dim);">Blockchain Dev / Bug Hunter</span>
+            </div>
+            <div class="monitor-row">
+                <span class="monitor-label">STATUS</span>
+                <span class="monitor-value green blink">● ONLINE</span>
+            </div>
+
+            <div class="monitor-divider"></div>
+
+            <!-- Performance Block -->
+            <div class="monitor-row">
+                <span class="monitor-label">CPU LOAD</span>
+                <span class="monitor-value green" id="cpu-text">—</span>
+            </div>
+            <div class="cpu-bar-container">
+                <div class="cpu-bar" id="cpu-bar"></div>
+            </div>
+            <div class="monitor-row" style="margin-top:2px;">
+                <span class="monitor-label">FRAME_T</span>
+                <span class="monitor-value" id="fps-text">— ms</span>
+            </div>
+
+            <div class="monitor-divider"></div>
+
+            <!-- Meta Block -->
+            <div class="monitor-row">
+                <span class="monitor-label">LAST_MOD</span>
+                <span class="monitor-value" id="last-mod-text">SYNCING...</span>
+            </div>
+            <div class="monitor-row">
+                <span class="monitor-label">GIT_REPOS</span>
+                <span class="monitor-value" id="git-repos">FETCHING...</span>
+            </div>
+            
+            <div class="monitor-divider"></div>
+
+            <!-- Connect Block -->
+            <div class="monitor-title" style="margin-top:0.2rem;">[ HANDSHAKE ]</div>
+            <div class="connect-links">
+                <a href="https://www.linkedin.com/in/saurabhsingh98" target="_blank" class="connect-btn">LINKEDIN</a>
+                <a href="https://github.com/saurabhsingh-98" target="_blank" class="connect-btn">GITHUB</a>
+            </div>
+            <div class="connect-links">
+                <a href="mailto:rsaurabhsingh84@gmail.com" class="connect-btn" style="flex:1;">EMAIL ↗</a>
+            </div>
+        </aside>
 
         <footer class="dash-footer reveal-down">
             <div class="social-links">
@@ -402,10 +601,19 @@ body {
                         <div class="block-text">
                             <p><span class="label">LOC:</span> Vadodara, Gujarat, IND (IST)</p>
                             <p><span class="label">DEGREE:</span> B.Tech CSE (Blockchain Spec)</p>
-                            <br>
-                            <p class="mission-statement">"Primary objective: Master advanced Blockchain architectures. Secondary: Expand LinkedIn network, Bug Bounty operations, and Web3 project synthesis."</p>
                         </div>
                     </div>
+                </div>
+                <!-- Full Bio -->
+                <div style="margin-top: 1.5rem; border-top: 1px dashed rgba(8,247,254,0.2); padding-top: 1.5rem;">
+                    <h3 class="cyber-text" style="margin-bottom: 1rem; font-size: 0.85rem; letter-spacing: 0.15em;">// WHO_AM_I.exe</h3>
+                    <div class="block-text" style="line-height: 1.8; color: #bbb;">
+                        <p style="margin-bottom: 0.8rem;">I'm a B.Tech CSE student specializing in Blockchain technology, on a mission to become a leading Web3 architect and ethical hacker. I live and breathe decentralized systems, smart contract security, and distributed protocols.</p>
+                        <p style="margin-bottom: 0.8rem;">My passion lies in bridging the gap between cryptography and real-world application — building reliable, trustless systems that operate without a central point of failure. I obsess over consensus mechanisms, tokenomics, and on-chain security vulnerabilities.</p>
+                        <p>When I'm not pushing Solidity contracts to testnet or auditing smart contract security, I'm exploring the latest in the Hedera ecosystem and crafting tools that push the boundaries of what's possible in DeFi.</p>
+                    </div>
+                    <p class="mission-statement" style="margin-top: 1.2rem;">"I believe decentralization is a superpower and I'm here to build that power — one smart contract at a time."</p>
+                    <a href="resume.html" target="_blank" class="cyber-btn" style="display: inline-block; margin-top: 1.5rem; font-size: 0.8rem;">DOWNLOAD RESUME &#x2193;</a>
                 </div>
             </div>
         </div>
@@ -433,7 +641,7 @@ body {
                     <div class="skill-sect" style="grid-column: span 2;">
                         <h3 class="cyber-text">SPECIAL_OPS</h3>
                         <div class="tech-tags">
-                            <span class="tag alert">Cybersecurity</span><span class="tag alert">Bug Bounty</span><span class="tag">SAML Auth</span><span class="tag">AI</span>
+                            <span class="tag alert">Cybersecurity</span><span class="tag">SAML Auth</span><span class="tag">AI</span>
                         </div>
                     </div>
                 </div>
@@ -447,39 +655,66 @@ body {
                 <div class="os-close" onclick="closeWindow('win-projects')">X</div>
             </div>
             <div class="os-window-content">
-                <a href="https://github.com/saurabhsingh-98/crypto-portfolio-tracker" target="_blank" class="mission-card mb-4" data-magnetic>
-                    <div class="mission-overlay"></div>
-                    <div class="mission-status blink">ACTIVE_NODE</div>
-                    <h3>Crypto Portfolio Tracker</h3>
-                    <p>Comprehensive tracking system for cryptocurrency assets. Completed integration with the Hedera Hashgraph network.</p>
-                    <div class="mission-footer">
-                        <span class="tech-stack">[ Hedera Hashgraph ]</span>
-                        <span class="highlight">SECURE_LINK ↗</span>
+
+                <!-- Project 01 -->
+                <a href="https://github.com/saurabhsingh-98/crypto-portfolio-tracker" target="_blank" class="mission-card mb-4" data-magnetic style="display:flex; gap:1.5rem; align-items:flex-start;">
+                    <div style="font-family: var(--font-mono); font-size: 2rem; color: rgba(8,247,254,0.2); flex-shrink:0; line-height:1;">01</div>
+                    <div style="flex:1;">
+                        <div class="mission-status blink">ACTIVE_NODE</div>
+                        <h3>Crypto Portfolio Tracker</h3>
+                        <p>Comprehensive tracking system for cryptocurrency assets with real-time price feeds and Hedera Hashgraph network integration.</p>
+                        <div class="tech-tags" style="margin-top:0.8rem;">
+                            <span class="tag">Hedera Hashgraph</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">HTS</span>
+                        </div>
+                        <div class="mission-footer" style="margin-top:0.8rem;">
+                            <span class="tech-stack">[ Hedera DLT ]</span>
+                            <span class="highlight">SECURE_LINK ↗</span>
+                        </div>
                     </div>
                 </a>
 
-                <!-- IN PROGRESS PROJECTS -->
-                <div class="mission-card mb-4" style="border-color: rgba(250,204,21,0.3);" data-magnetic>
-                    <div class="mission-overlay"></div>
-                    <div class="mission-status" style="color: #facc15;">STATUS: INITIALIZING...</div>
-                    <h3>DeFi Smart Contract Suite</h3>
-                    <p>Building a robust suite of EVM-compatible decentralized finance contracts deployed on the Hedera Testnet.</p>
-                    <div class="mission-footer">
-                        <span class="tech-stack" style="color: #666;">[ Solidity / Hardhat ]</span>
-                        <span class="highlight" style="color: #666;">BUILDING_CORE ⏳</span>
+                <!-- Project 02 -->
+                <div class="mission-card mb-4" style="display:flex; gap:1.5rem; align-items:flex-start; border-color: rgba(250,204,21,0.3);" data-magnetic>
+                    <div style="font-family: var(--font-mono); font-size: 2rem; color: rgba(250,204,21,0.2); flex-shrink:0; line-height:1;">02</div>
+                    <div style="flex:1;">
+                        <div class="mission-status" style="color: #facc15;">STATUS: BUILDING_CORE</div>
+                        <h3>DeFi Smart Contract Suite</h3>
+                        <p>A robust suite of EVM-compatible decentralized finance contracts — AMM, staking, and governance — deployed on the Hedera Testnet.</p>
+                        <div class="tech-tags" style="margin-top:0.8rem;">
+                            <span class="tag">Solidity</span>
+                            <span class="tag">Hardhat</span>
+                            <span class="tag">EVM</span>
+                            <span class="tag">Hedera</span>
+                        </div>
+                        <div class="mission-footer" style="margin-top:0.8rem;">
+                            <span class="tech-stack" style="color:#666;">[ Web3 / DeFi ]</span>
+                            <span class="highlight" style="color:#666;">IN PROGRESS ⏳</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mission-card mb-4" style="border-color: rgba(250,204,21,0.3);" data-magnetic>
-                    <div class="mission-overlay"></div>
-                    <div class="mission-status" style="color: #facc15;">STATUS: CONCEPTUAL PHASE...</div>
-                    <h3>Automated Bug Bounty Scanner</h3>
-                    <p>Developing a custom Python utility for automating initial reconnaissance on target domains for HackerOne bug bounties.</p>
-                    <div class="mission-footer">
-                        <span class="tech-stack" style="color: #666;">[ Python / Security ]</span>
-                        <span class="highlight" style="color: #666;">IN_PROGRESS ⏳</span>
+                <!-- Project 03 -->
+                <div class="mission-card mb-4" style="display:flex; gap:1.5rem; align-items:flex-start; border-color: rgba(250,204,21,0.3);" data-magnetic>
+                    <div style="font-family: var(--font-mono); font-size: 2rem; color: rgba(250,204,21,0.2); flex-shrink:0; line-height:1;">03</div>
+                    <div style="flex:1;">
+                        <div class="mission-status" style="color: #facc15;">STATUS: CONCEPTUAL PHASE</div>
+                        <h3>Automated Recon & Vulnerability Scanner</h3>
+                        <p>A custom Python utility for automating initial reconnaissance on HackerOne targets — subdomain enumeration, endpoint discovery, and vulnerability fingerprinting.</p>
+                        <div class="tech-tags" style="margin-top:0.8rem;">
+                            <span class="tag alert">Python</span>
+                            <span class="tag alert">Cybersecurity</span>
+                            <span class="tag">OSINT</span>
+                            <span class="tag">Automation</span>
+                        </div>
+                        <div class="mission-footer" style="margin-top:0.8rem;">
+                            <span class="tech-stack" style="color:#666;">[ Security / Python ]</span>
+                            <span class="highlight" style="color:#666;">BUILDING ⏳</span>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -507,6 +742,43 @@ body {
                     <div class="iframe-container cyber-frame">
                         <iframe src="https://www.hackerrank.com/certificates/iframe/6e050a64949e" allowfullscreen title="HackerRank Cert 3"></iframe>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LET'S CONNECT WINDOW -->
+        <div class="os-window hidden" id="win-connect" style="width: 580px;">
+            <div class="os-window-header" data-draghandle="win-connect">
+                <div class="os-title">initiate_handshake.sh</div>
+                <div class="os-close" onclick="closeWindow('win-connect')">X</div>
+            </div>
+            <div class="os-window-content">
+                <div class="terminal-alert mb-4" style="border-color: rgba(8,247,254,0.3); color: var(--text-dim);">
+                    &gt; STATUS: Open to internships, collaborations, and projects in the Blockchain / Web3 / Smart Contract Security space.<br><br>
+                    Drop a message or reach me through any platform below.
+                </div>
+                <div style="display:flex; flex-direction:column; gap:1rem;">
+                    <a href="https://github.com/saurabhsingh-98" target="_blank" class="mission-card" style="text-decoration:none; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1.5rem;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="color:var(--cyber-cyan); flex-shrink:0;"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.386-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.807 1.305 3.492.998.108-.775.418-1.305.762-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                        <div>
+                            <div style="font-family:var(--font-mono); color:var(--cyber-cyan); font-size:0.9rem; letter-spacing:0.1em;">GITHUB &#x2197;</div>
+                            <div style="font-family:var(--font-mono); color:#666; font-size:0.8rem; margin-top:2px;">github.com/saurabhsingh-98</div>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/saurabhsingh98" target="_blank" class="mission-card" style="text-decoration:none; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1.5rem;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="color:#0ea5e9; flex-shrink:0;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <div>
+                            <div style="font-family:var(--font-mono); color:#0ea5e9; font-size:0.9rem; letter-spacing:0.1em;">LINKEDIN &#x2197;</div>
+                            <div style="font-family:var(--font-mono); color:#666; font-size:0.8rem; margin-top:2px;">linkedin.com/in/saurabhsingh98</div>
+                        </div>
+                    </a>
+                    <a href="mailto:rsaurabhsingh84@gmail.com" class="mission-card" style="text-decoration:none; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1.5rem;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--cyber-green); flex-shrink:0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <div>
+                            <div style="font-family:var(--font-mono); color:var(--cyber-green); font-size:0.9rem; letter-spacing:0.1em;">EMAIL &#x2197;</div>
+                            <div style="font-family:var(--font-mono); color:#666; font-size:0.8rem; margin-top:2px;">rsaurabhsingh84@gmail.com</div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -637,44 +909,48 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // --- B. Cyber Tilt (Dashboard Modules) ---
-        document.querySelectorAll('[data-tilt]').forEach(el => {
-            el.addEventListener("mousemove", (e) => {
-                const rect = el.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-                const intensity = 15; 
+        // Only trigger on non-touch devices
+        const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        
+        if (!isTouchDevice) {
+            document.querySelectorAll('[data-tilt]').forEach(el => {
+                el.addEventListener("mousemove", (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    const intensity = 15; 
+                    
+                    const target = el.querySelector('.module-content') || el;
+                    
+                    gsap.to(target, {
+                        rotateY: x * intensity,
+                        rotateX: -y * intensity,
+                        duration: 0.4, ease: "power2.out", transformPerspective: 1000
+                    });
+                });
                 
-                const target = el.querySelector('.module-content') || el;
-                
-                gsap.to(target, {
-                    rotateY: x * intensity,
-                    rotateX: -y * intensity,
-                    duration: 0.4, ease: "power2.out", transformPerspective: 1000
+                el.addEventListener("mouseleave", () => {
+                    const target = el.querySelector('.module-content') || el;
+                    gsap.to(target, { rotateY: 0, rotateX: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
                 });
             });
-            
-            el.addEventListener("mouseleave", () => {
-                const target = el.querySelector('.module-content') || el;
-                gsap.to(target, { rotateY: 0, rotateX: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
-            });
-        });
 
-        // --- C. Magnetic Pull Effect (Cyber style) ---
-        // Exclude the main big modules from intense magnetic pull to avoid bad UX, only apply to sub-elements or specific buttons
-        document.querySelectorAll('.cyber-btn').forEach(btn => {
-            btn.addEventListener("mousemove", (e) => {
-                const rect = btn.getBoundingClientRect();
-                const h = rect.width / 2;
-                const y = rect.height / 2;
-                const dx = e.clientX - rect.left - h;
-                const dy = e.clientY - rect.top - y;
-                
-                gsap.to(btn, { x: dx * 0.3, y: dy * 0.3, duration: 0.3, ease: "power2.out" });
+            // --- C. Magnetic Pull Effect (Cyber style) ---
+            document.querySelectorAll('.cyber-btn').forEach(btn => {
+                btn.addEventListener("mousemove", (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const h = rect.width / 2;
+                    const y = rect.height / 2;
+                    const dx = e.clientX - rect.left - h;
+                    const dy = e.clientY - rect.top - y;
+                    
+                    gsap.to(btn, { x: dx * 0.3, y: dy * 0.3, duration: 0.3, ease: "power2.out" });
+                });
+                btn.addEventListener("mouseleave", () => {
+                    gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+                });
             });
-            btn.addEventListener("mouseleave", () => {
-                gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
-            });
-        });
+        }
 
         // --- D. GSAP Reveal Loading ---
         gsap.set(".main-dashboard", { opacity: 1 });
@@ -794,6 +1070,84 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // --- 5. CLOUD MONITOR LOGIC ---
+    function initCloudMonitor() {
+        // Last Modified Date
+        const lastModEl = document.getElementById("last-mod-text");
+        if (lastModEl) {
+            const modDate = new Date(document.lastModified);
+            lastModEl.textContent = modDate.toISOString().split('T')[0];
+        }
+
+        // GitHub Repos Fetch
+        const gitReposEl = document.getElementById("git-repos");
+        if (gitReposEl) {
+            fetch("https://api.github.com/users/saurabhsingh-98")
+                .then(res => res.json())
+                .then(data => {
+                    if (data.public_repos !== undefined) {
+                        gitReposEl.textContent = data.public_repos;
+                    } else {
+                        gitReposEl.textContent = "ERR";
+                    }
+                })
+                .catch(err => {
+                    gitReposEl.textContent = "OFFLINE";
+                });
+        }
+
+        // CPU / Frame Timing Simulation
+        const cpuTextEl = document.getElementById("cpu-text");
+        const cpuBarEl = document.getElementById("cpu-bar");
+        const fpsTextEl = document.getElementById("fps-text");
+        
+        let lastTime = performance.now();
+        let frameCount = 0;
+        let lastReportTime = lastTime;
+
+        function updateCPU(time) {
+            const delta = time - lastTime;
+            lastTime = time;
+            frameCount++;
+
+            // Update display every ~500ms
+            if (time - lastReportTime > 500) {
+                const avgFrameTime = (time - lastReportTime) / frameCount;
+                if(fpsTextEl) fpsTextEl.textContent = avgFrameTime.toFixed(1) + " ms";
+                
+                let simulatedLoad = (avgFrameTime / 16.6) * 15; 
+                simulatedLoad += Math.random() * 20 + 5; 
+                
+                if (simulatedLoad > 99) simulatedLoad = 99;
+                if (simulatedLoad < 1) simulatedLoad = 1;
+
+                if(cpuTextEl) cpuTextEl.textContent = simulatedLoad.toFixed(1) + "%";
+                if(cpuBarEl) cpuBarEl.style.width = simulatedLoad + "%";
+                
+                if (simulatedLoad > 70) {
+                    cpuBarEl.style.background = "var(--cyber-red)";
+                    cpuBarEl.style.boxShadow = "0 0 8px var(--cyber-red)";
+                    cpuTextEl.style.color = "var(--cyber-red)";
+                } else if (simulatedLoad > 40) {
+                    cpuBarEl.style.background = "var(--cyber-yellow)";
+                    cpuBarEl.style.boxShadow = "0 0 8px var(--cyber-yellow)";
+                    cpuTextEl.style.color = "var(--cyber-yellow)";
+                } else {
+                    cpuBarEl.style.background = "var(--cyber-green)";
+                    cpuBarEl.style.boxShadow = "0 0 8px var(--cyber-green)";
+                    cpuTextEl.style.color = "var(--cyber-green)";
+                }
+
+                lastReportTime = time;
+                frameCount = 0;
+            }
+            requestAnimationFrame(updateCPU);
+        }
+        requestAnimationFrame(updateCPU);
+    }
+    
+    initCloudMonitor();
 
 });
     </script>
