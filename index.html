@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYS.BOOT // Saurabh Kumar Singh // Dashboard</title>
+    <meta name="description" content="Cyberpunk Dashboard Portfolio of Saurabh Kumar Singh, Blockchain Developer and Bug Bounty Hunter.">
+    <!-- Google Fonts: Share Tech Mono for code/boot, Rajdhani/Chakra Petch for UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --bg-base: #010103;
+    --bg-darker: #000000;
+    --text-primary: #e0f2fe;
+    --text-dim: #7dd3fc;
+    --cyber-green: #00ff41;
+    --cyber-cyan: #08f7fe;
+    --cyber-red: #ff2a2a;
+    --cyber-yellow: #facc15;
+    --border-dim: rgba(8, 247, 254, 0.2);
+    --surface-bg: rgba(2, 6, 23, 0.85);
+    --font-ui: 'Chakra Petch', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+}
+
+/* Reset & Base */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    height: 100vh;
+    overflow: hidden; /* Lock scroll, it's a dashboard */
+}
+
+@media (min-width: 768px) {
+    body, a, button, .dash-module { cursor: none !important; }
+}
+
+.hidden { display: none !important; }
+
+/* === EFFECTS === */
+.scanlines {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+    background-size: 100% 4px; pointer-events: none; z-index: 10000;
+}
+.static-scan { animation: scrollScan 10s linear infinite; opacity: 0.3; }
+@keyframes scrollScan { 0% { background-position: 0 0; } 100% { background-position: 0 400px; } }
+
+.vignette {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.85) 150%);
+    pointer-events: none; z-index: 9999;
+}
+
+/* Custom Cursor */
+.cursor-dot {
+    width: 6px; height: 6px; background-color: var(--cyber-cyan); border-radius: 50%;
+    position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+    pointer-events: none; z-index: 100000; box-shadow: 0 0 10px var(--cyber-cyan);
+    transition: width 0.1s, height 0.1s;
+}
+.cursor-outline {
+    width: 30px; height: 30px; border: 1px solid var(--cyber-cyan);
+    position: fixed; top: 0; left: 0; transform: translate(-50%, -50%) rotate(45deg);
+    pointer-events: none; z-index: 99998; transition: width 0.2s, height 0.2s, transform 0.2s;
+}
+.cursor-dot.active { width: 40px; height: 40px; background-color: rgba(8, 247, 254, 0.2); }
+.cursor-outline.active { width: 60px; height: 60px; transform: translate(-50%, -50%) rotate(90deg); border-color: transparent; }
+
+/* === BOOT SEQUENCE === */
+.boot-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background-color: var(--bg-darker); z-index: 99999;
+    display: flex; flex-direction: column; padding: 2rem;
+    color: var(--cyber-green); transition: opacity 0.5s ease-out; font-family: var(--font-mono);
+}
+.boot-screen.fade-out { opacity: 0; pointer-events: none; }
+.boot-logo { font-size: 1.2rem; margin-bottom: 2rem; border-bottom: 1px solid var(--cyber-green); display: inline-block; padding-bottom: 0.5rem; }
+.boot-text-container { flex: 1; font-size: 0.9rem; line-height: 1.5; text-shadow: 0 0 5px var(--cyber-green); }
+.boot-line { margin-bottom: 0.2rem; }
+.boot-error { color: var(--cyber-red); }
+.boot-warn { color: var(--cyber-yellow); }
+.loading-wrapper { margin: 2rem 0; display: flex; align-items: center; gap: 1rem; }
+.loading-bar { flex: 1; height: 20px; border: 1px solid var(--cyber-green); padding: 2px; }
+.loading-progress { height: 100%; width: 0%; background-color: var(--cyber-green); box-shadow: 0 0 10px var(--cyber-green); }
+.access-granted { font-size: 4rem; font-weight: bold; text-align: center; color: var(--cyber-cyan); text-shadow: 0 0 20px var(--cyber-cyan); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; }
+
+/* === MAIN DASHBOARD UI === */
+.main-dashboard {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; 
+    /* Hexagon background pattern for the desktop */
+    background-image: 
+        radial-gradient(rgba(8, 247, 254, 0.05) 1px, transparent 1px),
+        radial-gradient(rgba(8, 247, 254, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+    opacity: 0; z-index: 10;
+}
+
+.dash-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 3rem; background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border-dim);
+}
+.user-identity { display: flex; align-items: center; gap: 1rem; }
+.user-icon { width: 12px; height: 12px; background: var(--cyber-green); border-radius: 50%; box-shadow: 0 0 10px var(--cyber-green); animation: pulse 2s infinite; }
+@keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+.user-name { font-size: 1.5rem; font-weight: bold; letter-spacing: 0.1em; color: var(--text-primary); }
+.user-role { font-family: var(--font-mono); font-size: 0.9rem; margin-top: 5px; }
+.system-time { font-family: var(--font-mono); color: var(--text-dim); }
+
+.cyber-text { color: var(--cyber-cyan); text-shadow: 0 0 8px rgba(8, 247, 254, 0.4); }
+
+/* Dashboard Grid */
+.dashboard-grid {
+    flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem; padding: 4rem 10%; align-content: center;
+    perspective: 1000px; /* For 3D Tilt */
+}
+
+/* Dashboard Modules (Buttons) */
+.dash-module {
+    position: relative; height: 250px;
+    border: 1px solid var(--border-dim); background: rgba(2, 6, 23, 0.5);
+    clip-path: polygon(25px 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px);
+    display: flex; align-items: center; justify-content: center;
+    transform-style: preserve-3d; transition: border-color 0.3s, box-shadow 0.3s;
+}
+.dash-module::before {
+    content: ''; position: absolute; top:0; left:0; width: 5px; height: 100%;
+    background: var(--cyber-cyan); opacity: 0.3; transition: 0.3s;
+}
+.module-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(8,247,254,0.1) 0%, transparent 70%);
+    opacity: 0; transition: 0.3s; pointer-events: none;
+}
+.module-content {
+    text-align: center; transform: translateZ(40px); /* 3D pop out */
+    pointer-events: none;
+}
+.module-icon {
+    color: var(--cyber-cyan); margin-bottom: 1.5rem; transition: transform 0.3s;
+    filter: drop-shadow(0 0 8px rgba(8,247,254,0.5));
+}
+.module-title { font-size: 1.5rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+.module-sub { font-family: var(--font-mono); color: var(--text-dim); font-size: 0.9rem; }
+
+/* Module Hover States */
+.dash-module:hover { border-color: var(--cyber-cyan); box-shadow: 0 0 20px rgba(8,247,254,0.15); }
+.dash-module:hover::before { opacity: 1; box-shadow: 0 0 10px var(--cyber-cyan); }
+.dash-module:hover .module-bg { opacity: 1; }
+.dash-module:hover .module-icon { transform: scale(1.1); }
+
+/* Footer */
+.dash-footer {
+    padding: 1.5rem 3rem; display: flex; justify-content: flex-end;
+    border-top: 1px solid var(--border-dim); background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+}
+.cyber-btn {
+    display: inline-block; padding: 0.5rem 1.5rem; font-size: 0.9rem;
+    text-transform: uppercase; font-family: var(--font-mono);
+    border: 1px solid var(--cyber-cyan); color: var(--cyber-cyan);
+    background: transparent; transition: 0.3s; text-decoration: none;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+.cyber-btn:hover { background: var(--cyber-cyan); color: #000; box-shadow: 0 0 15px var(--cyber-cyan); }
+
+
+/* ========================================== */
+/* OVERLAY WINDOWS (DRAGGABLE POPUPS)         */
+/* ========================================== */
+.windows-container {
+    position: absolute; top:0; left:0; width: 100vw; height: 100vh;
+    pointer-events: none; z-index: 50; overflow: hidden;
+}
+
+.os-window {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 700px; max-width: 95vw; max-height: 85vh;
+    background: var(--surface-bg); border: 1px solid var(--cyber-cyan);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 15px rgba(8,247,254,0.2);
+    display: flex; flex-direction: column;
+    pointer-events: auto;
+    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.os-window-header {
+    background: rgba(8, 247, 254, 0.15); border-bottom: 1px solid var(--cyber-cyan);
+    padding: 10px 15px; display: flex; justify-content: space-between; align-items: center;
+    cursor: grab; user-select: none;
+}
+.os-window-header:active { cursor: grabbing; }
+.os-title { font-family: var(--font-mono); font-size: 1rem; color: var(--cyber-cyan); letter-spacing: 0.05em; }
+.os-close { color: var(--text-primary); transition: 0.2s; font-size: 1.2rem; padding: 0 5px; font-weight: bold; }
+.os-close:hover { color: var(--cyber-red);text-shadow: 0 0 8px var(--cyber-red); }
+
+.os-window-content { padding: 2rem; overflow-y: auto; flex: 1; }
+
+/* Sub-styles for Window Contents */
+/* Profile specific */
+.profile-layout { display: flex; gap: 2rem; align-items: center; }
+.profile-frame {
+    width: 200px; height: 250px; flex-shrink: 0;
+    border: 1px solid var(--border-dim); position: relative;
+    padding: 10px; background: rgba(0,0,0,0.5);
+}
+.profile-pic-placeholder { width: 100%; height: 100%; background: #111; position: relative; overflow: hidden; }
+.target-reticle {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 60px; height: 60px; border: 1px dashed var(--cyber-cyan); border-radius: 50%;
+    animation: spin 10s linear infinite; opacity: 0.3;
+}
+@keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* Shared text */
+.block-text { font-family: var(--font-mono); font-size: 1rem; line-height: 1.6; color: #ccc; }
+.label { color: var(--cyber-cyan); margin-right: 10px; }
+.mission-statement { font-style: italic; border-left: 2px solid var(--cyber-green); padding-left: 1rem; color: var(--text-dim); margin-top: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+
+/* Skills Grid */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.skill-sect { background: rgba(0,0,0,0.6); padding: 1.5rem; border: 1px solid #333; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+.skill-sect h3 { font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 1px dashed #333; padding-bottom: 0.5rem; }
+.tech-list { list-style: none; font-family: var(--font-mono); font-size: 0.9rem; color: #ccc; }
+.tech-list li { margin-bottom: 0.5rem; }
+.tech-list li::before { content: '>'; color: var(--cyber-green); margin-right: 8px; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag { font-family: var(--font-mono); font-size: 0.8rem; padding: 4px 8px; background: rgba(8,247,254,0.1); border: 1px solid var(--border-dim); color: var(--text-dim); }
+.tag.alert { border-color: rgba(255,42,42,0.5); color: #ff8888; background: rgba(255,42,42,0.1); }
+
+/* Mission Card */
+.mission-card {
+    display: block; padding: 2rem; background: var(--bg-darker);
+    border: 1px solid var(--border-dim); text-decoration: none; color: inherit; transition: 0.3s;
+    position: relative; overflow: hidden;
+}
+.mission-card:hover { border-color: var(--cyber-cyan); box-shadow: inset 0 0 20px rgba(8,247,254,0.1); }
+.mission-status { font-family: var(--font-mono); color: var(--cyber-green); font-size: 0.8rem; margin-bottom: 0.5rem; }
+.blink { animation: blinkStatus 1.5s infinite; }
+@keyframes blinkStatus { 50% { opacity: 0.3; } }
+.mission-card h3 { font-size: 1.6rem; margin-bottom: 0.8rem; color: var(--text-primary); }
+.mission-card p { color: #aaa; margin-bottom: 2rem; font-size: 1rem; }
+.mission-footer { display: flex; justify-content: space-between; border-top: 1px dashed #333; padding-top: 1.5rem; font-family: var(--font-mono); font-size: 0.9rem; }
+.tech-stack { color: var(--cyber-cyan); }
+.highlight { color: var(--text-primary); transition: 0.3s;}
+.mission-card:hover .highlight { color: var(--cyber-cyan); transform: translateX(5px); }
+
+/* Certs */
+.terminal-alert { font-family: var(--font-mono); color: var(--cyber-yellow); font-size: 0.9rem; background: rgba(250,204,21,0.1); border: 1px solid rgba(250,204,21,0.3); padding: 1rem; }
+.certs-scrollable { display: flex; flex-direction: column; gap: 1.5rem; }
+.iframe-container { position: relative; width: 100%; padding-bottom: 75%; height: 0; border: 1px solid #333; background: #000; }
+.iframe-container iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:none; filter: grayscale(100%); transition: filter 0.4s; }
+.iframe-container:hover iframe { filter: grayscale(0%); }
+
+/* Start animations */
+.reveal-up, .reveal-down { visibility: hidden; }
+
+/* Scrollbar styling for windows */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(8,247,254,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyber-cyan); }
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .dash-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .profile-layout { flex-direction: column; text-align: center; }
+}
+@media (max-width: 768px) {
+    .dashboard-grid { padding: 2rem 5%; grid-template-columns: 1fr; gap: 2rem; }
+    .os-window { width: 95vw; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .skill-sect[style*="grid-column"] { grid-column: span 1 !important; }
+}
+    </style>
+</head>
+<body class="locked">
+    
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" data-cursor></div>
+    <div class="cursor-outline" data-cursor></div>
+    
+    <!-- CRT Effects -->
+    <div class="scanlines static-scan"></div>
+    <div class="vignette"></div>
+
+    <!-- Boot Sequence Screen -->
+    <div id="boot-screen" class="boot-screen">
+        <div class="boot-container">
+            <div class="boot-logo">SKS.OS // v4.0.01 // GUI EDITION</div>
+            <div id="boot-text-container" class="boot-text-container"></div>
+            <div class="loading-wrapper hidden" id="loading-wrapper">
+                <div class="loading-bar"><div class="loading-progress" id="loading-progress"></div></div>
+                <div class="loading-percentage" id="loading-percentage">0%</div>
+            </div>
+            <div id="access-granted" class="access-granted hidden text-glitch" data-text="SYSTEM ONLINE">SYSTEM ONLINE</div>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD UI (hidden until boot finishes) -->
+    <div id="main-dashboard" class="main-dashboard hidden">
+        <header class="dash-header reveal-down">
+            <div class="user-identity">
+                <span class="user-icon"></span>
+                <span class="user-name">SAURABH KUMAR SINGH</span>
+                <span class="user-role cyber-text">BLOCKCHAIN_DEV // BOUNTY_HUNTER</span>
+            </div>
+            <div class="system-time" id="sys-time">DATE: SYNCING...</div>
+        </header>
+
+        <div class="dashboard-grid">
+            
+            <!-- Module 1: Profile -->
+            <div class="dash-module reveal-up" data-tilt onclick="openWindow('win-about')" data-magnetic>
+                <div class="module-bg"></div>
+                <div class="module-content">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <h2 class="module-title">[ USER_PROFILE ]</h2>
+                    <p class="module-sub">Bio // Location // Mission</p>
+                </div>
+            </div>
+
+            <!-- Module 2: Tech Core -->
+            <div class="dash-module reveal-up" style="transition-delay: 100ms;" data-tilt onclick="openWindow('win-skills')" data-magnetic>
+                <div class="module-bg"></div>
+                <div class="module-content">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    </div>
+                    <h2 class="module-title">[ CORE_TECH_DB ]</h2>
+                    <p class="module-sub">Hedera Hashgraph // Languages // AI</p>
+                </div>
+            </div>
+
+            <!-- Module 3: Projects -->
+            <div class="dash-module reveal-up" style="transition-delay: 200ms;" data-tilt onclick="openWindow('win-projects')" data-magnetic>
+                <div class="module-bg"></div>
+                <div class="module-content">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    </div>
+                    <h2 class="module-title">[ MISSION_ARCHIVES ]</h2>
+                    <p class="module-sub">Crypto Portfolio Tracker</p>
+                </div>
+            </div>
+
+            <!-- Module 4: Certifications -->
+            <div class="dash-module reveal-up" style="transition-delay: 300ms;" data-tilt onclick="openWindow('win-certs')" data-magnetic>
+                <div class="module-bg"></div>
+                <div class="module-content">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h2 class="module-title">[ CREDENTIALS ]</h2>
+                    <p class="module-sub">Encrypted HackerRank Datasets</p>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="dash-footer reveal-down">
+            <div class="social-links">
+                <a href="https://github.com/saurabhsingh-98" target="_blank" class="cyber-btn" data-magnetic>GITHUB_UPLINK ↗</a>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- OVERLAY WINDOWS (Hidden until clicked)     -->
+    <!-- ========================================== -->
+    <div id="windows-container" class="windows-container">
+        
+        <!-- ABOUT.TXT WINDOW -->
+        <div class="os-window hidden" id="win-about">
+            <div class="os-window-header" data-draghandle="win-about">
+                <div class="os-title">user_profile.dat</div>
+                <div class="os-close" onclick="closeWindow('win-about')">X</div>
+            </div>
+            <div class="os-window-content">
+                <div class="profile-layout">
+                    <div class="profile-frame">
+                        <div class="glitch-effect"></div>
+                        <div class="profile-pic-placeholder">
+                            <div class="target-reticle"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="cyber-text">SAURABH KUMAR SINGH</h2>
+                        <div class="block-text">
+                            <p><span class="label">LOC:</span> Vadodara, Gujarat, IND (IST)</p>
+                            <p><span class="label">DEGREE:</span> B.Tech CSE (Blockchain Spec)</p>
+                            <br>
+                            <p class="mission-statement">"Primary objective: Master advanced Blockchain architectures. Secondary: Expand LinkedIn network, Bug Bounty operations, and Web3 project synthesis."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SKILLS.SH WINDOW -->
+        <div class="os-window hidden" id="win-skills">
+            <div class="os-window-header" data-draghandle="win-skills">
+                <div class="os-title">core_tech_db.exe</div>
+                <div class="os-close" onclick="closeWindow('win-skills')">X</div>
+            </div>
+            <div class="os-window-content">
+                <div class="skills-grid">
+                    <div class="skill-sect">
+                        <h3 class="cyber-text">BLOCKCHAIN_OPS</h3>
+                        <ul class="tech-list">
+                            <li>Hedera Hashgraph</li><li>DAG Architecture</li><li>HCS & HTS</li><li>EVM Smart Contracts</li>
+                        </ul>
+                    </div>
+                    <div class="skill-sect">
+                        <h3 class="cyber-text">LANGUAGES</h3>
+                        <div class="tech-tags">
+                            <span class="tag">Python</span><span class="tag">C++</span><span class="tag">Rust</span><span class="tag">Java</span><span class="tag">SQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-sect" style="grid-column: span 2;">
+                        <h3 class="cyber-text">SPECIAL_OPS</h3>
+                        <div class="tech-tags">
+                            <span class="tag alert">Cybersecurity</span><span class="tag alert">Bug Bounty</span><span class="tag">SAML Auth</span><span class="tag">AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECTS/ARCHIVES WINDOW -->
+        <div class="os-window hidden" id="win-projects">
+            <div class="os-window-header" data-draghandle="win-projects">
+                <div class="os-title">mission_archives/</div>
+                <div class="os-close" onclick="closeWindow('win-projects')">X</div>
+            </div>
+            <div class="os-window-content">
+                <a href="https://github.com/saurabhsingh-98/crypto-portfolio-tracker" target="_blank" class="mission-card mb-4" data-magnetic>
+                    <div class="mission-overlay"></div>
+                    <div class="mission-status blink">ACTIVE_NODE</div>
+                    <h3>Crypto Portfolio Tracker</h3>
+                    <p>Comprehensive tracking system for cryptocurrency assets. Completed integration with the Hedera Hashgraph network.</p>
+                    <div class="mission-footer">
+                        <span class="tech-stack">[ Hedera Hashgraph ]</span>
+                        <span class="highlight">SECURE_LINK ↗</span>
+                    </div>
+                </a>
+
+                <!-- IN PROGRESS PROJECTS -->
+                <div class="mission-card mb-4" style="border-color: rgba(250,204,21,0.3);" data-magnetic>
+                    <div class="mission-overlay"></div>
+                    <div class="mission-status" style="color: #facc15;">STATUS: INITIALIZING...</div>
+                    <h3>DeFi Smart Contract Suite</h3>
+                    <p>Building a robust suite of EVM-compatible decentralized finance contracts deployed on the Hedera Testnet.</p>
+                    <div class="mission-footer">
+                        <span class="tech-stack" style="color: #666;">[ Solidity / Hardhat ]</span>
+                        <span class="highlight" style="color: #666;">BUILDING_CORE ⏳</span>
+                    </div>
+                </div>
+
+                <div class="mission-card mb-4" style="border-color: rgba(250,204,21,0.3);" data-magnetic>
+                    <div class="mission-overlay"></div>
+                    <div class="mission-status" style="color: #facc15;">STATUS: CONCEPTUAL PHASE...</div>
+                    <h3>Automated Bug Bounty Scanner</h3>
+                    <p>Developing a custom Python utility for automating initial reconnaissance on target domains for HackerOne bug bounties.</p>
+                    <div class="mission-footer">
+                        <span class="tech-stack" style="color: #666;">[ Python / Security ]</span>
+                        <span class="highlight" style="color: #666;">IN_PROGRESS ⏳</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CERTIFICATIONS WINDOW -->
+        <div class="os-window hidden" id="win-certs">
+            <div class="os-window-header" data-draghandle="win-certs">
+                <div class="os-title">credentials.dat (Encrypted)</div>
+                <div class="os-close" onclick="closeWindow('win-certs')">X</div>
+            </div>
+            <div class="os-window-content">
+                <div class="terminal-alert mb-4">
+                    > STATUS: Hashgraph Association Certification Achieved.
+                    <br><br>
+                    <a href="https://certs.hashgraphdev.com/92db9258-f373-4efe-b061-5fea3058149a.pdf" target="_blank" style="color: var(--cyber-cyan); text-decoration: underline;">
+                        [ VERIFY_CLEARANCE: Hashgraph Certificate ] ↗
+                    </a>
+                </div>
+                <div class="certs-scrollable">
+                    <div class="iframe-container cyber-frame mb-4">
+                        <iframe src="https://www.hackerrank.com/certificates/iframe/144acd11f6c7" allowfullscreen title="HackerRank Cert 1"></iframe>
+                    </div>
+                    <div class="iframe-container cyber-frame mb-4">
+                        <iframe src="https://www.hackerrank.com/certificates/iframe/688d1c350b17" allowfullscreen title="HackerRank Cert 2"></iframe>
+                    </div>
+                    <div class="iframe-container cyber-frame">
+                        <iframe src="https://www.hackerrank.com/certificates/iframe/6e050a64949e" allowfullscreen title="HackerRank Cert 3"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- 1. SYSTEM TIME (Header) ---
+    function updateTime() {
+        const timeEl = document.getElementById("sys-time");
+        if(timeEl) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            timeEl.textContent = `SYS.DATE: ${now.toISOString().split('T')[0]} // TIME: ${timeString} IST`;
+        }
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // --- 2. BOOT SEQUENCE LOGIC ---
+    const bootLines = [
+        "[+] Initializing SKS OS Kernel v4.0.01...",
+        "[+] Loading user profile: SAURABH KUMAR SINGH",
+        "[-] Verifying Blockchain Modules...",
+        "[+] Hedera Hashgraph HCS/HTS: OK",
+        "[-] Loading Encrypted Credentials...",
+        "[+] Payload verified. Bypass successful.",
+        "[-] Executing GUI Dashboard Subroutines...",
+        "[+] Dashboard Active. Welcome back, User.",
+    ];
+
+    const bootContainer = document.getElementById("boot-text-container");
+    const loadingWrapper = document.getElementById("loading-wrapper");
+    const loadingProgress = document.getElementById("loading-progress");
+    const loadingPercentage = document.getElementById("loading-percentage");
+    const accessGranted = document.getElementById("access-granted");
+    const bootScreen = document.getElementById("boot-screen");
+    const mainDashboard = document.getElementById("main-dashboard");
+    const body = document.body;
+
+    let lineIndex = 0;
+
+    function printBootLine() {
+        if (lineIndex < bootLines.length) {
+            const p = document.createElement("p");
+            p.className = "boot-line";
+            const text = bootLines[lineIndex];
+            if (text.startsWith("[-]")) p.classList.add("boot-warn");
+            if (text.startsWith("[!]")) p.classList.add("boot-error");
+            p.textContent = text;
+            bootContainer.appendChild(p);
+            lineIndex++;
+            setTimeout(printBootLine, Math.random() * 150 + 50); // Faster for GUI
+        } else {
+            setTimeout(startLoading, 300);
+        }
+    }
+
+    function startLoading() {
+        loadingWrapper.classList.remove("hidden");
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 10) + 2;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                loadingProgress.style.width = "100%";
+                loadingPercentage.textContent = "100%";
+                setTimeout(showAccessGranted, 500);
+            } else {
+                loadingProgress.style.width = `${progress}%`;
+                loadingPercentage.textContent = `${progress}%`;
+            }
+        }, 40); // Faster loading
+    }
+
+    function showAccessGranted() {
+        bootContainer.classList.add("hidden");
+        loadingWrapper.classList.add("hidden");
+        accessGranted.classList.remove("hidden");
+        
+        setTimeout(() => {
+            bootScreen.classList.add("fade-out");
+            mainDashboard.classList.remove("hidden");
+            
+            // Allow CSS transitions to happen
+            setTimeout(() => {
+                bootScreen.remove();
+                initDashboardAnimations();
+            }, 500);
+        }, 1000);
+    }
+
+    setTimeout(printBootLine, 200);
+
+
+    // --- 3. DASHBOARD ANIMATIONS & LOGIC ---
+    function initDashboardAnimations() {
+        
+        // --- A. Custom Cursor Fallback ---
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorOutline = document.querySelector(".cursor-outline");
+
+        window.addEventListener("mousemove", (e) => {
+            if(cursorDot) {
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+            }
+            if(cursorOutline) {
+                cursorOutline.style.left = `${e.clientX}px`;
+                cursorOutline.style.top = `${e.clientY}px`;
+            }
+        });
+
+        document.querySelectorAll('a, button, [data-magnetic]').forEach(el => {
+            el.addEventListener("mouseenter", () => {
+                cursorDot.classList.add("active");
+                cursorOutline.classList.add("active");
+            });
+            el.addEventListener("mouseleave", () => {
+                cursorDot.classList.remove("active");
+                cursorOutline.classList.remove("active");
+            });
+        });
+
+        // --- B. Cyber Tilt (Dashboard Modules) ---
+        document.querySelectorAll('[data-tilt]').forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                const intensity = 15; 
+                
+                const target = el.querySelector('.module-content') || el;
+                
+                gsap.to(target, {
+                    rotateY: x * intensity,
+                    rotateX: -y * intensity,
+                    duration: 0.4, ease: "power2.out", transformPerspective: 1000
+                });
+            });
+            
+            el.addEventListener("mouseleave", () => {
+                const target = el.querySelector('.module-content') || el;
+                gsap.to(target, { rotateY: 0, rotateX: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
+            });
+        });
+
+        // --- C. Magnetic Pull Effect (Cyber style) ---
+        // Exclude the main big modules from intense magnetic pull to avoid bad UX, only apply to sub-elements or specific buttons
+        document.querySelectorAll('.cyber-btn').forEach(btn => {
+            btn.addEventListener("mousemove", (e) => {
+                const rect = btn.getBoundingClientRect();
+                const h = rect.width / 2;
+                const y = rect.height / 2;
+                const dx = e.clientX - rect.left - h;
+                const dy = e.clientY - rect.top - y;
+                
+                gsap.to(btn, { x: dx * 0.3, y: dy * 0.3, duration: 0.3, ease: "power2.out" });
+            });
+            btn.addEventListener("mouseleave", () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+
+        // --- D. GSAP Reveal Loading ---
+        gsap.set(".main-dashboard", { opacity: 1 });
+        gsap.set(".reveal-up, .reveal-down", { autoAlpha: 1 });
+
+        const tl = gsap.timeline();
+        tl.from(".reveal-down", { y: -50, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.2 })
+          .from(".reveal-up", { 
+              y: 100, opacity: 0, rotationX: 10, 
+              duration: 1, stagger: 0.1, ease: "back.out(1.2)" 
+          }, "-=0.5");
+          
+        // Initialize Windows dragging here so it's ready
+        initDraggableWindows();
+    }
+
+    // --- 4. WINDOW MANAGEMENT LOGIC ---
+    let zIndexCounter = 100;
+
+    // We expose openWindow to global scope for the inline onclick handler
+    window.openWindow = function(id) {
+        const win = document.getElementById(id);
+        if(!win) return;
+        
+        if (win.classList.contains("hidden")) {
+            win.classList.remove("hidden");
+            
+            // Random offset so windows don't perfectly stack
+            const offsetX = (Math.random() - 0.5) * 50;
+            const offsetY = (Math.random() - 0.5) * 50;
+            
+            gsap.fromTo(win, 
+                { opacity: 0, scale: 0.8, x: offsetX, y: offsetY + 50 },
+                { opacity: 1, scale: 1, x: offsetX, y: offsetY, duration: 0.6, ease: "back.out(1.5)" }
+            );
+        }
+        
+        // Bring to front
+        zIndexCounter++;
+        win.style.zIndex = zIndexCounter;
+    };
+
+    window.closeWindow = function(id) {
+        const win = document.getElementById(id);
+        if(!win) return;
+        
+        // Get current transform to animate out properly from where it was dragged
+        const computed = window.getComputedStyle(win);
+        const matrix = new DOMMatrix(computed.transform);
+        
+        gsap.to(win, { 
+            opacity: 0, 
+            scale: 0.8, 
+            y: matrix.m42 + 50, 
+            duration: 0.3, 
+            ease: "power2.in",
+            onComplete: () => {
+                win.classList.add("hidden");
+                gsap.set(win, { clearProps: "all" }); 
+            }
+        });
+        
+        // Prevent click from propagating to anything behind it
+        event.stopPropagation();
+    };
+
+    function initDraggableWindows() {
+        const windows = document.querySelectorAll(".os-window");
+        
+        windows.forEach(win => {
+            const header = win.querySelector(".os-window-header");
+            let isDragging = false;
+            let startX, startY, initialX, initialY;
+
+            // Click anywhere on window brings to front
+            win.addEventListener("mousedown", () => {
+                zIndexCounter++;
+                win.style.zIndex = zIndexCounter;
+            });
+
+            header.addEventListener("mousedown", dragStart);
+
+            function dragStart(e) {
+                // Don't drag if clicking close button
+                if(e.target.classList.contains('os-close')) return;
+                
+                const computed = window.getComputedStyle(win);
+                const transform = new DOMMatrix(computed.transform);
+                initialX = transform.m41;
+                initialY = transform.m42;
+                
+                startX = e.clientX;
+                startY = e.clientY;
+                isDragging = true;
+                
+                document.addEventListener("mousemove", drag);
+                document.addEventListener("mouseup", dragEnd);
+            }
+
+            function drag(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                
+                gsap.set(win, {
+                    x: initialX + dx,
+                    y: initialY + dy
+                });
+            }
+
+            function dragEnd() {
+                isDragging = false;
+                document.removeEventListener("mousemove", drag);
+                document.removeEventListener("mouseup", dragEnd);
+            }
+        });
+    }
+
+});
+    </script>
+</body>
+</html>
