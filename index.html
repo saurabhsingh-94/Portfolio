@@ -25,6 +25,48 @@
     --font-mono: 'Share Tech Mono', monospace;
 }
 
+/* Base Glitch Classes */
+.text-glitch { position: relative; display: inline-block; white-space: nowrap; }
+.text-glitch::before, .text-glitch::after {
+    content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.8;
+}
+.text-glitch::before {
+    left: 2px; text-shadow: -2px 0 var(--cyber-red); clip-path: inset(0 0 0 0);
+    animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+}
+.text-glitch::after {
+    left: -2px; text-shadow: 2px 0 var(--cyber-cyan); clip-path: inset(0 0 0 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+@keyframes glitch-anim-1 {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 40% 0); }
+}
+@keyframes glitch-anim-2 {
+    0% { clip-path: inset(10% 0 60% 0); }
+    20% { clip-path: inset(30% 0 20% 0); }
+    40% { clip-path: inset(70% 0 10% 0); }
+    60% { clip-path: inset(20% 0 50% 0); }
+    80% { clip-path: inset(50% 0 30% 0); }
+    100% { clip-path: inset(5% 0 80% 0); }
+}
+
+/* === RED ALERT MODE VARIABLES === */
+body.red-alert {
+    --cyber-green: #ff2a2a;
+    --cyber-cyan: #ff6a00;
+    --border-dim: rgba(255, 42, 42, 0.3);
+}
+body.red-alert .text-glitch::after { text-shadow: 2px 0 var(--cyber-yellow); }
+body.red-alert .cursor-dot { background-color: var(--cyber-red); box-shadow: 0 0 10px var(--cyber-red); }
+body.red-alert .cursor-outline { border-color: var(--cyber-red); }
+body.red-alert .vignette { background: radial-gradient(circle, transparent 50%, rgba(50, 0, 0, 0.85) 150%); }
+
 /* Reset & Base */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -383,7 +425,7 @@ body {
 .iframe-container iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:none; filter: grayscale(100%); transition: filter 0.4s; }
 .iframe-container:hover iframe { filter: grayscale(0%); }
 
-/* Start animations */
+/* Reveal animations */
 .reveal-up, .reveal-down { visibility: hidden; }
 
 /* Scrollbar styling for windows */
@@ -391,6 +433,25 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(8,247,254,0.3); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--cyber-cyan); }
+
+/* === 3D CUBE EASTER EGG === */
+.scene { width: 200px; height: 200px; perspective: 600px; margin: 3rem auto; }
+.cube { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: spinCube 12s infinite linear; }
+.cube__face {
+    position: absolute; width: 200px; height: 200px;
+    border: 2px solid var(--cyber-cyan);
+    background: rgba(8, 247, 254, 0.1);
+    box-shadow: inset 0 0 20px rgba(8, 247, 254, 0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; font-family: var(--font-mono); color: var(--text-primary); text-shadow: 0 0 10px var(--cyber-cyan);
+}
+.cube__face--front  { transform: rotateY(  0deg) translateZ(100px); }
+.cube__face--right  { transform: rotateY( 90deg) translateZ(100px); }
+.cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
+.cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
+.cube__face--top    { transform: rotateX( 90deg) translateZ(100px); }
+.cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+@keyframes spinCube { 0% { transform: translateZ(-100px) rotateX(0deg) rotateY(0deg); } 100% { transform: translateZ(-100px) rotateX(360deg) rotateY(360deg); } }
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
@@ -445,7 +506,7 @@ body {
         <header class="dash-header reveal-down">
             <div class="user-identity">
                 <span class="user-icon"></span>
-                <span class="user-name">SAURABH KUMAR SINGH</span>
+                <span class="user-name text-glitch" data-text="SAURABH KUMAR SINGH">SAURABH KUMAR SINGH</span>
                 <span class="user-role cyber-text">BLOCKCHAIN_DEV // CSE_STUDENT</span>
             </div>
             <div class="system-time" id="sys-time">DATE: SYNCING...</div>
@@ -513,6 +574,30 @@ body {
                 </div>
             </div>
 
+            <!-- Module 6: Terminal -->
+            <div class="dash-module reveal-up" style="transition-delay: 500ms;" data-tilt onclick="openWindow('win-terminal')" data-magnetic>
+                <div class="module-bg"></div>
+                <div class="module-content">
+                    <div class="module-icon" style="color: var(--cyber-cyan);">
+                        <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                    </div>
+                    <h2 class="module-title">[ TERMINAL ]</h2>
+                    <p class="module-sub">Root Shell Access</p>
+                </div>
+            </div>
+
+            <!-- Module 7: Hologram Core -->
+            <div class="dash-module reveal-up" style="transition-delay: 600ms;" data-tilt onclick="openWindow('win-hologram')" data-magnetic>
+                <div class="module-bg"></div>
+                <div class="module-content">
+                    <div class="module-icon" style="color: var(--cyber-cyan);">
+                        <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg>
+                    </div>
+                    <h2 class="module-title">[ HOLO_CORE ]</h2>
+                    <p class="module-sub">3D Visualization Engine</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- Cloud Monitor Panel -->
@@ -565,7 +650,7 @@ body {
             <!-- Connect Block -->
             <div class="monitor-title" style="margin-top:0.2rem;">[ HANDSHAKE ]</div>
             <div class="connect-links">
-                <a href="https://www.linkedin.com/in/saurabh-singh-381a65383/" target="_blank" class="connect-btn">LINKEDIN</a>
+                <a href="https://www.linkedin.com/in/saurabhsingh98" target="_blank" class="connect-btn">LINKEDIN</a>
                 <a href="https://github.com/saurabhsingh-98" target="_blank" class="connect-btn">GITHUB</a>
             </div>
             <div class="connect-links">
@@ -769,7 +854,7 @@ body {
                             <div style="font-family:var(--font-mono); color:#666; font-size:0.8rem; margin-top:2px;">github.com/saurabhsingh-98</div>
                         </div>
                     </a>
-                    <a href="https://www.linkedin.com/in/saurabh-singh-381a65383/" target="_blank" class="mission-card" style="text-decoration:none; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1.5rem;">
+                    <a href="https://www.linkedin.com/in/saurabhsingh98" target="_blank" class="mission-card" style="text-decoration:none; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1.5rem;">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="color:#0ea5e9; flex-shrink:0;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                         <div>
                             <div style="font-family:var(--font-mono); color:#0ea5e9; font-size:0.9rem; letter-spacing:0.1em;">LINKEDIN &#x2197;</div>
@@ -783,6 +868,26 @@ body {
                             <div style="font-family:var(--font-mono); color:#666; font-size:0.8rem; margin-top:2px;">rsaurabhsingh84@gmail.com</div>
                         </div>
                     </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TERMINAL WINDOW -->
+        <div class="os-window hidden" id="win-terminal" style="width: 750px; height: 500px; background: #010103;">
+            <div class="os-window-header" data-draghandle="win-terminal">
+                <div class="os-title">root@sks.os:~</div>
+                <div class="os-close" onclick="closeWindow('win-terminal')">X</div>
+            </div>
+            <div class="os-window-content" id="terminal-content" style="padding: 1rem; font-family: var(--font-mono); font-size: 0.95rem; color: var(--cyber-green); overflow-y: auto; display: flex; flex-direction: column;">
+                <div id="terminal-output" style="flex: 1; white-space: pre-wrap; margin-bottom: 0.5rem; word-break: break-all;">
+SKS OS v4.0.01 (tty1)
+
+Welcome to the internal system shell.
+Type 'help' for available commands.
+</div>
+                <div style="display: flex; align-items: center;">
+                    <span style="color: var(--cyber-cyan); margin-right: 8px;">root@sks.os:~$</span>
+                    <input type="text" id="terminal-input" style="flex: 1; background: transparent; border: none; color: var(--cyber-green); font-family: var(--font-mono); font-size: 0.95rem; outline: none; caret-color: var(--cyber-cyan);" autocomplete="off" spellcheck="false" autofocus>
                 </div>
             </div>
         </div>
@@ -805,9 +910,9 @@ body {
                         <div style="display:inline-flex; align-items:center; gap:0.4rem; margin-top:0.5rem; font-family:var(--font-mono); font-size:0.8rem; color:#63b3ed; background:rgba(99,179,237,0.08); border:1px solid rgba(99,179,237,0.25); padding:0.25rem 0.7rem; border-radius:4px;">&#x25B8; Blockchain Developer</div>
                     </div>
                     <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.4rem; font-size:0.8rem; color:#94a3b8;">
-                        <a href="https://www.linkedin.com/in/saurabh-singh-381a65383/" target="_blank" style="color:#94a3b8; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">LinkedIn/</a>
-                        <a href="https://github.com/saurabhsingh-98" target="_blank" style="color:#94a3b8; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">github</a>
-                        <span>E-Mail</span>
+                        <a href="https://www.linkedin.com/in/saurabhsingh98" target="_blank" style="color:#94a3b8; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">linkedin.com/in/saurabhsingh98</a>
+                        <a href="https://github.com/saurabhsingh-98" target="_blank" style="color:#94a3b8; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">github.com/saurabhsingh-98</a>
+                        <span>rsaurabhsingh84@gmail.com</span>
                         <span>Vadodara, Gujarat, India</span>
                     </div>
                 </div>
@@ -828,7 +933,7 @@ body {
                             <div style="font-size:0.85rem; color:#94a3b8; margin-top:0.25rem;">Parul University of Engineering &amp; Technology &nbsp;&middot;&nbsp; Vadodara, Gujarat</div>
                         </div>
                         <div style="text-align:right; flex-shrink:0;">
-                            <div style="font-size:0.8rem; color:#64748b;">2023 &ndash; 2027</div>
+                            <div style="font-size:0.8rem; color:#64748b;">2022 &ndash; 2026</div>
                             <div style="display:inline-block; margin-top:0.3rem; padding:0.18rem 0.5rem; background:rgba(104,211,145,0.1); border:1px solid rgba(104,211,145,0.3); border-radius:4px; font-size:0.7rem; font-family:var(--font-mono); color:#68d391;">&#x25CF; IN PROGRESS</div>
                         </div>
                     </div>
@@ -973,6 +1078,30 @@ body {
             </div>
         </div>
 
+        <!-- HOLOGRAM WINDOW (3D CUBE) -->
+        <div class="os-window hidden" id="win-hologram" style="width: 500px; background: rgba(2, 6, 23, 0.9);">
+            <div class="os-window-header" data-draghandle="win-hologram">
+                <div class="os-title">render_target_schema.exe</div>
+                <div class="os-close" onclick="closeWindow('win-hologram')">X</div>
+            </div>
+            <div class="os-window-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <p style="font-family: var(--font-mono); color: var(--text-dim); font-size: 0.9rem; margin-bottom: 2rem;">&gt; INITIALIZING 3D CSS RENDER PIPELINE...</p>
+                
+                <div class="scene">
+                  <div class="cube">
+                    <div class="cube__face cube__face--front">WEB3</div>
+                    <div class="cube__face cube__face--back">HTML5</div>
+                    <div class="cube__face cube__face--right">EVM</div>
+                    <div class="cube__face cube__face--left">CSS3</div>
+                    <div class="cube__face cube__face--top">HEDERA</div>
+                    <div class="cube__face cube__face--bottom">SOL</div>
+                  </div>
+                </div>
+
+                <p style="font-family: var(--font-mono); color: var(--cyber-cyan); font-size: 0.8rem; margin-top: 2rem; animation: pulse 2s infinite;">&gt; MESH RENDER SUCCESSFUL</p>
+            </div>
+        </div>
+
     </div>
 
     <!-- Scripts -->
@@ -980,6 +1109,94 @@ body {
     <script>
 document.addEventListener("DOMContentLoaded", () => {
     
+    // --- 0. SOUND EFFECTS (Web Audio API Synthesizer) ---
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new AudioContext();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    function playSound(type) {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'type') {
+            // Mechanical typing click
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(400, now);
+            osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
+            gainNode.gain.setValueAtTime(0.05, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+            osc.start(now);
+            osc.stop(now + 0.05);
+        } else if (type === 'blip') {
+            // Small UI blip
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(1200, now);
+            osc.frequency.linearRampToValueAtTime(1800, now + 0.1);
+            gainNode.gain.setValueAtTime(0.1, now);
+            gainNode.gain.linearRampToValueAtTime(0.001, now + 0.1);
+            osc.start(now);
+            osc.stop(now + 0.1);
+        } else if (type === 'open') {
+            // Window open woosh
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(200, now);
+            osc.frequency.exponentialRampToValueAtTime(400, now + 0.2);
+            gainNode.gain.setValueAtTime(0, now);
+            gainNode.gain.linearRampToValueAtTime(0.1, now + 0.05);
+            gainNode.gain.linearRampToValueAtTime(0.001, now + 0.2);
+            osc.start(now);
+            osc.stop(now + 0.2);
+        } else if (type === 'close') {
+            // Window close woosh
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(400, now);
+            osc.frequency.exponentialRampToValueAtTime(200, now + 0.2);
+            gainNode.gain.setValueAtTime(0.1, now);
+            gainNode.gain.linearRampToValueAtTime(0.001, now + 0.2);
+            osc.start(now);
+            osc.stop(now + 0.2);
+        } else if (type === 'granted') {
+            // Success chord
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(440, now);
+            osc.frequency.setValueAtTime(554.37, now + 0.1); // C#
+            osc.frequency.setValueAtTime(659.25, now + 0.2); // E
+            gainNode.gain.setValueAtTime(0.15, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            osc.start(now);
+            osc.stop(now + 0.6);
+        } else if (type === 'alarm') {
+            // High pitched alert sound
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(800, now);
+            osc.frequency.setValueAtTime(1200, now + 0.1);
+            osc.frequency.setValueAtTime(800, now + 0.2);
+            osc.frequency.setValueAtTime(1200, now + 0.3);
+            gainNode.gain.setValueAtTime(0.1, now);
+            gainNode.gain.linearRampToValueAtTime(0.001, now + 0.4);
+            osc.start(now);
+            osc.stop(now + 0.4);
+        }
+    }
+
+    // Initialize audio on first user click anywhere (browser autoplay policy)
+    document.body.addEventListener('mousedown', initAudio, { once: true });
+    document.body.addEventListener('keydown', initAudio, { once: true });
+
+
     // --- 1. SYSTEM TIME (Header) ---
     function updateTime() {
         const timeEl = document.getElementById("sys-time");
@@ -1024,6 +1241,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (text.startsWith("[!]")) p.classList.add("boot-error");
             p.textContent = text;
             bootContainer.appendChild(p);
+            playSound('type'); // Play typing sound
             lineIndex++;
             setTimeout(printBootLine, Math.random() * 150 + 50); // Faster for GUI
         } else {
@@ -1054,6 +1272,8 @@ document.addEventListener("DOMContentLoaded", () => {
         loadingWrapper.classList.add("hidden");
         accessGranted.classList.remove("hidden");
         
+        playSound('granted');
+
         setTimeout(() => {
             bootScreen.classList.add("fade-out");
             mainDashboard.classList.remove("hidden");
@@ -1091,10 +1311,16 @@ document.addEventListener("DOMContentLoaded", () => {
             el.addEventListener("mouseenter", () => {
                 cursorDot.classList.add("active");
                 cursorOutline.classList.add("active");
+                playSound('blip'); // Play hover blip
             });
             el.addEventListener("mouseleave", () => {
                 cursorDot.classList.remove("active");
                 cursorOutline.classList.remove("active");
+            });
+            
+            // Blip on click as well
+            el.addEventListener("mousedown", () => {
+                playSound('type');
             });
         });
 
@@ -1162,11 +1388,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // We expose openWindow to global scope for the inline onclick handler
     window.openWindow = function(id) {
+        initAudio(); // Ensure audio context is running
         const win = document.getElementById(id);
         if(!win) return;
         
         if (win.classList.contains("hidden")) {
             win.classList.remove("hidden");
+            playSound('open');
             
             // Random offset so windows don't perfectly stack
             const offsetX = (Math.random() - 0.5) * 50;
@@ -1176,6 +1404,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 { opacity: 0, scale: 0.8, x: offsetX, y: offsetY + 50 },
                 { opacity: 1, scale: 1, x: offsetX, y: offsetY, duration: 0.6, ease: "back.out(1.5)" }
             );
+
+            // Focus terminal input if opening terminal
+            if (id === 'win-terminal') {
+                setTimeout(() => {
+                    document.getElementById('terminal-input').focus();
+                }, 100);
+            }
         }
         
         // Bring to front
@@ -1187,6 +1422,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const win = document.getElementById(id);
         if(!win) return;
         
+        playSound('close');
+
         // Get current transform to animate out properly from where it was dragged
         const computed = window.getComputedStyle(win);
         const matrix = new DOMMatrix(computed.transform);
@@ -1258,6 +1495,56 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.removeEventListener("mousemove", drag);
                 document.removeEventListener("mouseup", dragEnd);
             }
+        });
+    }
+
+    // --- 4.5 TERMINAL LOGIC ---
+    const termInput = document.getElementById('terminal-input');
+    const termOutput = document.getElementById('terminal-output');
+
+    if (termInput && termOutput) {
+        termInput.addEventListener('keydown', function(e) {
+            playSound('type');
+            if (e.key === 'Enter') {
+                const cmd = this.value.trim().toLowerCase();
+                this.value = ''; // clear input
+                
+                // Echo command
+                termOutput.textContent += `\nroot@sks.os:~$ ${cmd}\n`;
+                
+                // Process command
+                if (cmd === 'help') {
+                    termOutput.textContent += `Available commands:\n  help      - Show this message\n  clear     - Clear terminal output\n  whoami    - Display current user info\n  projects  - List active missions\n  contact   - Retrieve communication links\n  sudo      - Execute a command as superuser\n`;
+                } else if (cmd === 'clear') {
+                    termOutput.textContent = `SKS OS v4.0.01 (tty1)\n\nWelcome to the internal system shell.\nType 'help' for available commands.\n`;
+                } else if (cmd === 'whoami') {
+                    termOutput.textContent += `SAURABH KUMAR SINGH\nBlockchain Developer currently stationed in IND.\nSpecialties: EVM, Hedera, Solidity, Security.\nType 'projects' to see ongoing work.\n`;
+                } else if (cmd === 'projects') {
+                    termOutput.textContent += `[ACTIVE] Crypto Portfolio Tracker (Hedera HTS)\n[DEV] DeFi Smart Contract Suite (Solidity/Hardhat)\n[BUILDING] Automated Recon Scanner (Python)\n\nUse the GUI [MISSION_ARCHIVES] for secure links.\n`;
+                } else if (cmd === 'contact') {
+                    termOutput.textContent += `Email: rsaurabhsingh84@gmail.com\nLinkedIn: linkedin.com/in/saurabhsingh98\nGitHub: github.com/saurabhsingh-98\n`;
+                } else if (cmd === 'sudo override') {
+                    termOutput.innerHTML += `<span style="color:var(--cyber-red);">[!] WARNING: SUPERUSER PROTOCOL ACTIVATED</span>\n<span style="color:var(--cyber-red);">[!] INITIATING SYSTEM COLOR INVERSION...</span>\n`;
+                    playSound('alarm');
+                    setTimeout(() => { playSound('alarm'); }, 400);
+                    setTimeout(() => { playSound('alarm'); }, 800);
+                    document.body.classList.toggle('red-alert');
+                    window.dispatchEvent(new CustomEvent('theme-override'));
+                } else if (cmd.startsWith('sudo ')) {
+                    termOutput.textContent += `${cmd.replace('sudo ','')} is not in the sudoers file. This incident will be reported.\n`;
+                } else if (cmd !== '') {
+                    termOutput.textContent += `bash: ${cmd}: command not found\n`;
+                }
+                
+                // Auto scroll to bottom
+                const termContent = document.getElementById('terminal-content');
+                termContent.scrollTop = termContent.scrollHeight;
+            }
+        });
+        
+        // Click anywhere on terminal windows focuses input
+        document.getElementById('win-terminal').addEventListener('click', () => {
+            termInput.focus();
         });
     }
 
@@ -1358,7 +1645,16 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('resize', resize);
 
         // Colour palette: alternate cyan / green / white
-        const palette = ['#08f7fe', '#00ff9c', '#63b3ed', '#00ff9c', '#08f7fe', '#aaffdd'];
+        let palette = ['#08f7fe', '#00ff9c', '#63b3ed', '#00ff9c', '#08f7fe', '#aaffdd'];
+
+        // Listen for Red Alert mode theme override
+        window.addEventListener('theme-override', () => {
+            if (document.body.classList.contains('red-alert')) {
+                palette = ['#ff2a2a', '#ff6a00', '#facc15', '#ff2a2a', '#ff4d4d', '#ffaa00'];
+            } else {
+                palette = ['#08f7fe', '#00ff9c', '#63b3ed', '#00ff9c', '#08f7fe', '#aaffdd'];
+            }
+        });
 
         function draw() {
             // Semi-transparent black overlay for trail effect
