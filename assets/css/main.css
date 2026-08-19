@@ -1,6 +1,6 @@
 /* ==========================================================================
-   SAURABH KUMAR SINGH — CREATIVE DEVELOPER & SYSTEMS ENGINEER
-   Obsidian Glassmorphic + Bklit UI + Anime.js v4 + Motion Engine Suite
+   SAURABH KUMAR SINGH — CREATIVE DEVELOPER PORTFOLIO
+   Clean Obsidian Glassmorphic System + Motion Engine
    ========================================================================== */
 
 :root {
@@ -12,18 +12,17 @@
   --line-strong: rgba(255, 255, 255, 0.16);
   
   --primary: #0ea5e9;
-  --primary-glow: rgba(14, 165, 233, 0.3);
+  --primary-glow: rgba(14, 165, 233, 0.25);
   --cyan: #38bdf8;
   --emerald: #10b981;
   --indigo: #6366f1;
-  --purple: #a855f7;
   --red: #ef4444;
   --yellow: #f59e0b;
 
-  --card-bg: rgba(15, 23, 42, 0.7);
-  --card-hover: rgba(30, 41, 59, 0.9);
+  --card-bg: rgba(15, 23, 42, 0.65);
+  --card-hover: rgba(30, 41, 59, 0.85);
   --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 35px rgba(14, 165, 233, 0.15);
+  --shadow-glow: 0 0 30px rgba(14, 165, 233, 0.12);
   --radius: 16px;
   --radius-sm: 8px;
 
@@ -91,9 +90,7 @@ button {
   box-shadow: 0 0 10px #0ea5e9;
 }
 
-/* ==========================================================================
-   BKLIT UI: SHIMMERING TEXT COMPONENT (@bklit/shimmering-text)
-   ========================================================================== */
+/* Shimmering Text Component */
 .bklit-shimmer-text {
   background: linear-gradient(
     110deg,
@@ -116,153 +113,7 @@ button {
   100% { background-position: -200% 0; }
 }
 
-/* ==========================================================================
-   BKLIT UI FULL CHART SUITE (@bklit/area-chart, @bklit/line-chart, @bklit/heatmap-chart)
-   ========================================================================== */
-.bklit-chart-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  padding: 28px;
-  box-shadow: var(--shadow);
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.25s ease, border-color 0.25s ease;
-}
-
-.bklit-chart-card:hover {
-  border-color: rgba(14, 165, 233, 0.4);
-  box-shadow: var(--shadow), var(--shadow-glow);
-}
-
-.bklit-chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.bklit-chart-title {
-  font-size: 16px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.bklit-chart-subtitle {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* SVG Chart Elements */
-.bklit-chart-svg {
-  width: 100%;
-  height: 200px;
-  overflow: visible;
-}
-
-.bklit-area-fill {
-  fill: url(#bklit-area-gradient);
-  opacity: 0.85;
-}
-
-.bklit-line-stroke {
-  fill: none;
-  stroke: #0ea5e9;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.bklit-line-secondary {
-  fill: none;
-  stroke: #10b981;
-  stroke-width: 2.5;
-  stroke-dasharray: 4;
-}
-
-.bklit-dot {
-  fill: #0ea5e9;
-  stroke: #ffffff;
-  stroke-width: 2;
-  cursor: pointer;
-  transition: r 0.2s ease, fill 0.2s ease;
-}
-
-.bklit-dot:hover {
-  r: 7;
-  fill: #38bdf8;
-}
-
-/* Bklit Tooltip */
-.bklit-tooltip {
-  position: absolute;
-  padding: 8px 14px;
-  background: rgba(15, 23, 42, 0.95);
-  border: 1px solid var(--primary);
-  border-radius: 8px;
-  font-size: 12px;
-  font-family: var(--font-mono);
-  color: #ffffff;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-  z-index: 50;
-}
-
-.bklit-tooltip.active {
-  opacity: 1;
-}
-
-/* Bklit Heatmap Chart (@bklit/heatmap-chart) */
-.bklit-heatmap-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.bklit-heatmap-legend {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  font-family: var(--font-mono);
-  color: var(--muted);
-  margin-top: 12px;
-}
-
-.bklit-heatmap-grid {
-  display: grid;
-  grid-template-columns: repeat(28, 1fr);
-  gap: 5px;
-}
-
-.bklit-heatmap-cell {
-  height: 14px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.05);
-  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
-  cursor: pointer;
-}
-
-.bklit-heatmap-cell:hover {
-  transform: scale(1.35);
-  z-index: 10;
-  box-shadow: 0 0 10px var(--primary-glow);
-}
-
-.bklit-heatmap-cell[data-level="1"] { background: rgba(14, 165, 233, 0.25); }
-.bklit-heatmap-cell[data-level="2"] { background: rgba(14, 165, 233, 0.55); }
-.bklit-heatmap-cell[data-level="3"] { background: rgba(14, 165, 233, 0.85); }
-.bklit-heatmap-cell[data-level="4"] { background: var(--emerald); box-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
-
-/* ==========================================================================
-   1. SLEEK QUANTUM LOADER
-   ========================================================================== */
+/* Quantum Loader */
 .loader {
   position: fixed;
   inset: 0;
@@ -324,9 +175,7 @@ button {
   text-transform: uppercase;
 }
 
-/* ==========================================================================
-   2. STICKY HEADER & NAV
-   ========================================================================== */
+/* Header Nav */
 .header-nav {
   height: 82px;
   display: grid;
@@ -390,7 +239,7 @@ button {
   gap: 12px;
 }
 
-/* Premium Button System */
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -413,10 +262,6 @@ button {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(14, 165, 233, 0.35);
   background: #0284c7;
-}
-
-.btn:active {
-  transform: translateY(0);
 }
 
 .btn.outline {
@@ -449,38 +294,13 @@ button {
   border-color: var(--primary);
 }
 
-/* ==========================================================================
-   3. HERO SECTION
-   ========================================================================== */
+/* Hero Section */
 .hero-section {
   padding: 80px 0 90px;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 60px;
   align-items: center;
-}
-
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  background: rgba(14, 165, 233, 0.1);
-  border: 1px solid rgba(14, 165, 233, 0.2);
-  color: var(--cyan);
-  font-weight: 700;
-  font-size: 13px;
-  border-radius: 999px;
-  margin-bottom: 24px;
-  font-family: var(--font-mono);
-}
-
-.hero-tag-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--emerald);
-  box-shadow: 0 0 10px var(--emerald);
 }
 
 .hero-title {
@@ -528,25 +348,17 @@ button {
   font-weight: 600;
 }
 
-/* Interactive SVG Morphing & Motion Path Canvas Card */
+/* Clean Canvas Particle Node Card (No Model) */
 .hero-visual-card {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 480px;
   background: var(--card-bg);
   backdrop-filter: blur(16px);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   box-shadow: var(--shadow), var(--shadow-glow);
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-visual-card model-viewer {
-  width: 100%;
-  height: 100%;
 }
 
 .hero-canvas-fallback {
@@ -554,21 +366,6 @@ button {
   inset: 0;
   width: 100%;
   height: 100%;
-}
-
-/* SVG Morphing Polygon Container */
-.svg-morph-wrapper {
-  position: absolute;
-  width: 240px;
-  height: 240px;
-  pointer-events: none;
-}
-
-.svg-morph-path {
-  fill: url(#morph-gradient);
-  stroke: var(--cyan);
-  stroke-width: 2;
-  filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.4));
 }
 
 .visual-badge {
@@ -590,9 +387,7 @@ button {
   font-family: var(--font-mono);
 }
 
-/* ==========================================================================
-   4. SECTIONS & HEADINGS
-   ========================================================================== */
+/* Sections & Headings */
 .section {
   padding: 90px 0;
   border-top: 1px solid var(--line);
@@ -646,9 +441,7 @@ button {
   border-color: var(--primary);
 }
 
-/* ==========================================================================
-   5. SELECTED PROJECTS GRID
-   ========================================================================== */
+/* Selected Projects Grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -779,9 +572,7 @@ button {
   color: var(--cyan);
 }
 
-/* ==========================================================================
-   6. CAPABILITIES & CREDENTIALS
-   ========================================================================== */
+/* Capabilities & Credentials */
 .capabilities-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -872,9 +663,7 @@ button {
   margin-bottom: 10px;
 }
 
-/* ==========================================================================
-   7. TERMINAL SECTION
-   ========================================================================== */
+/* Terminal Section */
 .terminal-section {
   background: #070a11;
   color: #e2e8f0;
@@ -953,9 +742,7 @@ button {
   flex: 1;
 }
 
-/* ==========================================================================
-   8. FOOTER & CONTACT
-   ========================================================================== */
+/* Footer & Contact */
 .footer-contact {
   padding: 90px 0 60px;
   border-top: 1px solid var(--line);

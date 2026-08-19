@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PROJECT INVENTORY & BKLIT UI CHART SUITE
+   PROJECT INVENTORY ENGINE (REAL PROJECTS ONLY)
    ========================================================================== */
 
 let projectData = [];
@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchProjects();
   initThemeToggle();
   initTerminal();
-  initBklitCharts();
 });
 
 async function fetchProjects() {
@@ -62,54 +61,6 @@ function renderProjects(projects) {
   }).join('');
 }
 
-/* Bklit UI Chart Suite (@bklit/area-chart, @bklit/line-chart, @bklit/heatmap-chart) */
-function initBklitCharts() {
-  initBklitAreaChartTooltips();
-  initBklitHeatmap();
-}
-
-function initBklitAreaChartTooltips() {
-  const dots = document.querySelectorAll('.bklit-dot');
-  const tooltip = document.getElementById('bklit-chart-tooltip');
-  if (!dots.length || !tooltip) return;
-
-  dots.forEach(dot => {
-    dot.addEventListener('mouseenter', (e) => {
-      const val = dot.getAttribute('data-value');
-      const time = dot.getAttribute('data-time');
-
-      tooltip.innerHTML = `<strong>${val} TPS</strong><br><span style="color:var(--muted); font-size:11px;">Time: ${time}</span>`;
-      tooltip.classList.add('active');
-
-      const card = dot.closest('.bklit-chart-card');
-      const cardRect = card.getBoundingClientRect();
-      const dotRect = dot.getBoundingClientRect();
-
-      tooltip.style.left = `${dotRect.left - cardRect.left + 10}px`;
-      tooltip.style.top = `${dotRect.top - cardRect.top - 45}px`;
-    });
-
-    dot.addEventListener('mouseleave', () => {
-      tooltip.classList.remove('active');
-    });
-  });
-}
-
-function initBklitHeatmap() {
-  const heatmapGrid = document.getElementById('bklit-heatmap');
-  if (!heatmapGrid) return;
-
-  const totalCells = 84; // 12 weeks of commit activity
-  let html = '';
-
-  for (let i = 0; i < totalCells; i++) {
-    const level = Math.floor(Math.random() * 5);
-    html += `<div class="bklit-heatmap-cell" data-level="${level}" title="Commit & Contract Executions #${i + 1}"></div>`;
-  }
-
-  heatmapGrid.innerHTML = html;
-}
-
 function initFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   filterBtns.forEach(btn => {
@@ -140,7 +91,7 @@ function initThemeToggle() {
   });
 }
 
-/* Interactive Terminal Command Engine */
+/* Interactive Terminal Engine */
 function initTerminal() {
   const input = document.getElementById('terminal-input');
   const body = document.getElementById('terminal-body');
