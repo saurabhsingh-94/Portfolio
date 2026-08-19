@@ -1,6 +1,6 @@
 /* ==========================================================================
    SAURABH KUMAR SINGH — CREATIVE DEVELOPER PORTFOLIO
-   High-End Obsidian Glassmorphic System + Anime.js 3D Motion Engine
+   Clean Obsidian Glassmorphic System + Anime.js 3D Motion Engine
    ========================================================================== */
 
 :root {
@@ -20,8 +20,8 @@
   --red: #ef4444;
   --yellow: #f59e0b;
 
-  --card-bg: rgba(15, 23, 42, 0.65);
-  --card-hover: rgba(30, 41, 59, 0.85);
+  --card-bg: rgba(15, 23, 42, 0.75);
+  --card-hover: rgba(30, 41, 59, 0.95);
   --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 35px rgba(14, 165, 233, 0.18);
   --radius: 16px;
@@ -130,21 +130,6 @@ button {
   100% { background-position: -200% 0; }
 }
 
-/* Text Word Stagger Masking */
-.word-mask {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-}
-
-.word-span {
-  display: inline-block;
-  transform: translateY(110%) rotateX(-20deg);
-  transform-origin: bottom left;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
 /* Quantum Loader */
 .loader {
   position: fixed;
@@ -207,24 +192,24 @@ button {
   text-transform: uppercase;
 }
 
-/* Header Nav */
+/* Solid Obsidian Header Nav */
 .header-nav {
   height: 82px;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 24px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-strong);
   position: sticky;
   top: 0;
-  background: rgba(9, 13, 22, 0.85);
+  background: #090d16;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   z-index: 100;
 }
 
 [data-theme="light"] .header-nav {
-  background: rgba(248, 250, 252, 0.85);
+  background: #ffffff;
 }
 
 .brand-container {
@@ -341,7 +326,6 @@ button {
   line-height: 1.08;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
-  perspective: 600px;
 }
 
 .hero-bio {
@@ -381,7 +365,7 @@ button {
   font-weight: 600;
 }
 
-/* Interactive Canvas Node Card */
+/* Canvas Card */
 .hero-visual-card {
   position: relative;
   width: 100%;
@@ -476,7 +460,7 @@ button {
   border-color: var(--primary);
 }
 
-/* Selected Projects Grid with 3D Tilt Perspective */
+/* Selected Projects Grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
