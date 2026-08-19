@@ -1,7 +1,5 @@
 /* ==========================================================================
-   ANIME.JS ON-SCROLL ANIMATION ENGINE
-   - import { onScroll, animate } from 'animejs';
-   - animate(targets, { opacity: [0, 1], translateY: [40, 0], autoplay: onScroll(...) });
+   ANIME.JS ON-SCROLL ENGINE
    ========================================================================== */
 
 import anime from 'https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.es.js';
@@ -25,45 +23,38 @@ function initScrollProgressBar() {
     anime({
       targets: progressBar,
       width: `${scrolled}%`,
-      duration: 100,
+      duration: 50,
       easing: 'linear'
     });
   });
 }
 
-/* 2. Anime.js onScroll Intersection Observer Reveal System */
+/* 2. Anime.js onScroll Observer */
 function initAnimeOnScrollReveals() {
-  // Animate Hero Elements on Load
-  anime({
-    targets: '.hero-title, .hero-bio, .hero-actions, .hero-stats',
-    opacity: [0, 1],
-    translateY: [30, 0],
-    delay: anime.stagger(150),
-    duration: 1000,
-    easing: 'easeOutCubic'
-  });
+  window.observeProjectCards = function() {
+    const cards = document.querySelectorAll('.project-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          anime({
+            targets: entry.target,
+            opacity: [0, 1],
+            translateY: [35, 0],
+            duration: 650,
+            easing: 'easeOutCubic'
+          });
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
 
-  // onScroll observer for Project Cards
-  const cards = document.querySelectorAll('.project-card');
-  const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        anime({
-          targets: entry.target,
-          opacity: [0, 1],
-          translateY: [40, 0],
-          scale: [0.96, 1],
-          duration: 750,
-          easing: 'easeOutCubic'
-        });
-        cardObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
+    cards.forEach(card => cardObserver.observe(card));
+  };
 
-  cards.forEach(card => cardObserver.observe(card));
+  // Run initial observation
+  window.observeProjectCards();
 
-  // onScroll observer for Capabilities & Cert Cards
+  // Section items
   const sectionItems = document.querySelectorAll('.capability-card, .cert-card, .terminal-section');
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -72,7 +63,7 @@ function initAnimeOnScrollReveals() {
           targets: entry.target,
           opacity: [0, 1],
           translateY: [30, 0],
-          duration: 700,
+          duration: 600,
           easing: 'easeOutQuad'
         });
         sectionObserver.unobserve(entry.target);
@@ -83,7 +74,7 @@ function initAnimeOnScrollReveals() {
   sectionItems.forEach(item => sectionObserver.observe(item));
 }
 
-/* 3. Anime.js Stat Counters Triggered on Scroll Into View */
+/* 3. Stat Counters */
 function initAnimeCountersOnScroll() {
   const statContainer = document.querySelector('.hero-stats');
   if (!statContainer) return;
@@ -105,7 +96,7 @@ function initAnimeCountersOnScroll() {
             value: targetVal,
             round: 1,
             easing: 'easeOutExpo',
-            duration: 2200,
+            duration: 2000,
             update: function() {
               el.textContent = counterObj.value + suffix;
             }
@@ -113,7 +104,7 @@ function initAnimeCountersOnScroll() {
         });
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.4 });
 
   observer.observe(statContainer);
 }

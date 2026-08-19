@@ -1,6 +1,6 @@
 /* ==========================================================================
    SAURABH KUMAR SINGH — CREATIVE DEVELOPER PORTFOLIO
-   Clean Obsidian Glassmorphic System + Anime.js onScroll Engine
+   Clean Obsidian Glassmorphic System + Anime.js Engine
    ========================================================================== */
 
 :root {
@@ -78,7 +78,7 @@ button {
   margin: 0 auto;
 }
 
-/* Anime.js Scroll Progress Bar */
+/* Scroll Progress Bar */
 .scroll-progress-bar {
   position: fixed;
   top: 0;
@@ -309,7 +309,6 @@ button {
   line-height: 1.08;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
-  opacity: 0;
 }
 
 .hero-bio {
@@ -318,7 +317,6 @@ button {
   max-width: 620px;
   margin-bottom: 36px;
   line-height: 1.65;
-  opacity: 0;
 }
 
 .hero-actions {
@@ -326,7 +324,6 @@ button {
   flex-wrap: wrap;
   gap: 16px;
   margin-bottom: 48px;
-  opacity: 0;
 }
 
 .hero-stats {
@@ -334,7 +331,6 @@ button {
   gap: 40px;
   padding-top: 32px;
   border-top: 1px solid var(--line);
-  opacity: 0;
 }
 
 .stat-item .stat-num {
@@ -452,7 +448,7 @@ button {
   gap: 32px;
 }
 
-/* Initial state for Anime.js onScroll reveals */
+/* Cards are visible by default and enhanced with smooth transitions */
 .project-card, .capability-card, .cert-card, .terminal-section {
   background: var(--card-bg);
   backdrop-filter: blur(12px);
@@ -464,12 +460,13 @@ button {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
-  opacity: 0;
-  transform: translateY(30px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .project-card:hover, .capability-card:hover, .cert-card:hover {
+  transform: translateY(-6px);
   border-color: rgba(14, 165, 233, 0.4);
   box-shadow: var(--shadow), var(--shadow-glow);
 }
