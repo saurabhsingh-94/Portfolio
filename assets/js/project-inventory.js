@@ -52,7 +52,7 @@ function renderProjects(projects) {
           </a>
           ${p.links.live ? `
             <a href="${p.links.live}" target="_blank" rel="noopener" class="card-link" style="color: var(--muted);">
-              GitHub / Demo ↗
+              GitHub Repository ↗
             </a>
           ` : ''}
         </div>
@@ -103,30 +103,30 @@ function initTerminal() {
       input.value = '';
 
       // Print command line
-      appendTerminalLine(`saurabh@web3-dev:~$ ${escapeHtml(cmd)}`, '#38bdf8');
+      appendTerminalLine(`saurabh@web3-node:~$ ${escapeHtml(cmd)}`, 'var(--cyan)');
 
       switch (cmd) {
         case 'help':
-          appendTerminalLine('Available commands:\n- about       : Display developer biography\n- projects    : List all 6 real repositories\n- certs       : View verified credentials\n- clear       : Clear terminal output\n- contact     : Get contact links', '#e2e8f0');
+          appendTerminalLine('Available commands:\n- about       : Display developer biography\n- projects    : List all 6 real repositories\n- certs       : View verified credentials\n- clear       : Clear terminal output\n- contact     : Get contact links', 'var(--ink)');
           break;
         case 'about':
-          appendTerminalLine('Saurabh Kumar Singh — B.Tech CSE (Blockchain Spec).\nPassionate about Hedera Hashgraph, EVM Smart Contracts, Rust, and Fullstack Web3 development.', '#10b981');
+          appendTerminalLine('Saurabh Kumar Singh — B.Tech CSE (Blockchain Spec).\nPassionate about Hedera Hashgraph, EVM Smart Contracts, Rust, and Full-Stack Web3 development.', 'var(--emerald)');
           break;
         case 'projects':
-          appendTerminalLine(projectData.map(p => `• [${p.status}] ${p.title} (${p.technologies.slice(0, 3).join(', ')})`).join('\n'), '#f59e0b');
+          appendTerminalLine(projectData.map(p => `• [${p.status}] ${p.title} (${p.technologies.slice(0, 3).join(', ')})`).join('\n'), 'var(--yellow)');
           break;
         case 'certs':
-          appendTerminalLine('• Hashgraph Association Certified Developer\n• HackerRank Problem Solving & Python Certificates', '#a855f7');
+          appendTerminalLine('• Hashgraph Association Certified Developer\n• HackerRank Problem Solving & Python Certificates', 'var(--indigo)');
           break;
         case 'contact':
-          appendTerminalLine('GitHub: https://github.com/saurabhsingh-94\nLinkedIn: https://www.linkedin.com/in/saurabh-singh-381a65383/', '#38bdf8');
+          appendTerminalLine('GitHub: https://github.com/saurabhsingh-94\nLinkedIn: https://www.linkedin.com/in/saurabh-singh-381a65383/', 'var(--cyan)');
           break;
         case 'clear':
           body.innerHTML = '';
           break;
         default:
           if (cmd !== '') {
-            appendTerminalLine(`Command not found: "${escapeHtml(cmd)}". Type "help" for a list of available commands.`, '#ef4444');
+            appendTerminalLine(`Command not found: "${escapeHtml(cmd)}". Type "help" for a list of available commands.`, 'var(--red)');
           }
       }
 
@@ -135,7 +135,7 @@ function initTerminal() {
   });
 }
 
-function appendTerminalLine(text, color = '#e2e8f0') {
+function appendTerminalLine(text, color = 'var(--ink)') {
   const body = document.getElementById('terminal-body');
   if (!body) return;
 
@@ -145,7 +145,6 @@ function appendTerminalLine(text, color = '#e2e8f0') {
   div.style.whiteSpace = 'pre-wrap';
   div.textContent = text;
 
-  // Insert before the input line
   const inputWrap = document.querySelector('.terminal-input-wrap');
   body.insertBefore(div, inputWrap);
 }
