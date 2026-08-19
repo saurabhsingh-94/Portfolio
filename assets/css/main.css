@@ -1,6 +1,6 @@
 /* ==========================================================================
    SAURABH KUMAR SINGH — CREATIVE DEVELOPER PORTFOLIO
-   Clean Obsidian Glassmorphic System + Anime.js Engine
+   High-End Obsidian Glassmorphic System + Anime.js 3D Motion Engine
    ========================================================================== */
 
 :root {
@@ -12,17 +12,18 @@
   --line-strong: rgba(255, 255, 255, 0.16);
   
   --primary: #0ea5e9;
-  --primary-glow: rgba(14, 165, 233, 0.25);
+  --primary-glow: rgba(14, 165, 233, 0.35);
   --cyan: #38bdf8;
   --emerald: #10b981;
   --indigo: #6366f1;
+  --purple: #a855f7;
   --red: #ef4444;
   --yellow: #f59e0b;
 
   --card-bg: rgba(15, 23, 42, 0.65);
   --card-hover: rgba(30, 41, 59, 0.85);
   --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 30px rgba(14, 165, 233, 0.12);
+  --shadow-glow: 0 0 35px rgba(14, 165, 233, 0.18);
   --radius: 16px;
   --radius-sm: 8px;
 
@@ -76,6 +77,22 @@ button {
 .page {
   width: min(1380px, calc(100% - 48px));
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Ambient Cursor Glow Following Background */
+.ambient-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(99, 102, 241, 0.05) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s linear;
+  filter: blur(40px);
 }
 
 /* Scroll Progress Bar */
@@ -87,7 +104,7 @@ button {
   background: linear-gradient(90deg, #0ea5e9, #6366f1, #10b981);
   width: 0%;
   z-index: 10000;
-  box-shadow: 0 0 10px #0ea5e9;
+  box-shadow: 0 0 12px #0ea5e9;
 }
 
 /* Shimmering Text Component */
@@ -111,6 +128,21 @@ button {
 @keyframes bklitShimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* Text Word Stagger Masking */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.word-span {
+  display: inline-block;
+  transform: translateY(110%) rotateX(-20deg);
+  transform-origin: bottom left;
+  opacity: 0;
+  will-change: transform, opacity;
 }
 
 /* Quantum Loader */
@@ -254,13 +286,13 @@ button {
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 4px 14px var(--primary-glow);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.35);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4);
   background: #0284c7;
 }
 
@@ -309,6 +341,7 @@ button {
   line-height: 1.08;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
+  perspective: 600px;
 }
 
 .hero-bio {
@@ -348,7 +381,7 @@ button {
   font-weight: 600;
 }
 
-/* Canvas Card */
+/* Interactive Canvas Node Card */
 .hero-visual-card {
   position: relative;
   width: 100%;
@@ -359,6 +392,8 @@ button {
   border-radius: var(--radius);
   box-shadow: var(--shadow), var(--shadow-glow);
   overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
 }
 
 .hero-canvas-fallback {
@@ -441,14 +476,14 @@ button {
   border-color: var(--primary);
 }
 
-/* Selected Projects Grid */
+/* Selected Projects Grid with 3D Tilt Perspective */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 32px;
+  perspective: 1000px;
 }
 
-/* Cards are visible by default and enhanced with smooth transitions */
 .project-card, .capability-card, .cert-card, .terminal-section {
   background: var(--card-bg);
   backdrop-filter: blur(12px);
@@ -460,14 +495,13 @@ button {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 1;
-  transform: translateY(0);
+  transform-style: preserve-3d;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease-out;
+  will-change: transform, opacity;
 }
 
 .project-card:hover, .capability-card:hover, .cert-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(14, 165, 233, 0.4);
+  border-color: rgba(14, 165, 233, 0.45);
   box-shadow: var(--shadow), var(--shadow-glow);
 }
 
@@ -544,6 +578,12 @@ button {
   font-weight: 600;
   color: var(--ink);
   font-family: var(--font-mono);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tag-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
 }
 
 .card-footer {
@@ -573,6 +613,7 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 28px;
+  perspective: 1000px;
 }
 
 .capability-icon {
