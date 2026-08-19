@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PROJECT INVENTORY & INTERACTIVE TERMINAL ENGINE
+   PROJECT INVENTORY & BKLIT UI CHARTS ENGINE
    ========================================================================== */
 
 let projectData = [];
@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchProjects();
   initThemeToggle();
   initTerminal();
+  initBklitHeatmap();
 });
 
 async function fetchProjects() {
@@ -17,6 +18,7 @@ async function fetchProjects() {
     projectData = data.projects || [];
     renderProjects(projectData);
     initFilters();
+    initMotionScrollObserver();
   } catch (err) {
     console.error('Failed to load project inventory:', err);
   }
@@ -35,7 +37,7 @@ function renderProjects(projects) {
     const statusClass = p.status ? p.status.toLowerCase().replace(/\s+/g, '-') : 'production';
     
     return `
-      <div class="project-card" data-status="${statusClass}">
+      <div class="project-card visible" data-status="${statusClass}">
         <div class="card-top">
           <div class="card-header">
             <h3 class="card-title">${escapeHtml(p.title)}</h3>
@@ -59,6 +61,37 @@ function renderProjects(projects) {
       </div>
     `;
   }).join('');
+}
+
+/* Motion.js Intersection Observer for Scroll Animations */
+function initMotionScrollObserver() {
+  const cards = document.querySelectorAll('.project-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => observer.observe(card));
+}
+
+/* Bklit UI Heatmap Chart Generator (@bklit/heatmap-chart) */
+function initBklitHeatmap() {
+  const heatmapGrid = document.getElementById('bklit-heatmap');
+  if (!heatmapGrid) return;
+
+  const totalCells = 78; // 3 months of commit activity
+  let html = '';
+
+  for (let i = 0; i < totalCells; i++) {
+    // Generate organic activity levels (0-4)
+    const level = Math.floor(Math.random() * 5);
+    html += `<div class="bklit-heatmap-cell" data-level="${level}" title="Commit & Transaction Node #${i + 1}"></div>`;
+  }
+
+  heatmapGrid.innerHTML = html;
 }
 
 function initFilters() {

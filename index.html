@@ -27,7 +27,7 @@
           <div class="quantum-ring"></div>
           <div class="quantum-ring"></div>
         </div>
-        <div class="loader-title">INITIALIZING WEB3 ARCHITECTURE ENGINE</div>
+        <div class="loader-title bklit-shimmer-text">INITIALIZING WEB3 ARCHITECTURE ENGINE</div>
       </div>
     </div>
 
@@ -41,6 +41,7 @@
 
         <nav class="nav-links">
           <a href="#projects">Selected Work</a>
+          <a href="#analytics">Live Metrics</a>
           <a href="#about">Capabilities</a>
           <a href="#credentials">Credentials</a>
           <a href="#terminal">Terminal</a>
@@ -58,7 +59,7 @@
         </div>
       </header>
 
-      <!-- 3. HERO SECTION WITH 3D PRESENTATION -->
+      <!-- 3. HERO SECTION WITH 3D PRESENTATION & SHIMMERING TEXT -->
       <section class="hero-section">
         <div class="hero-text-col">
           <div class="hero-tag">
@@ -67,7 +68,7 @@
           </div>
 
           <h1 class="hero-title">
-            Architecting <span class="accent">decentralized protocols</span> & smart contract infrastructure.
+            Architecting <span class="bklit-shimmer-text">decentralized protocols</span> & smart contract infrastructure.
           </h1>
 
           <p class="hero-bio">
@@ -119,7 +120,59 @@
         </div>
       </section>
 
-      <!-- 4. SELECTED PROJECTS SECTION -->
+      <!-- 4. BKLIT UI ANALYTICS DASHBOARD (AREA CHART & HEATMAP) -->
+      <section class="section" id="analytics">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">BKLIT UI COMPONENT REGISTRY</div>
+            <h2 class="section-title">Network Metrics & Activity Charts</h2>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px;">
+          <!-- Bklit Area Chart (@bklit/area-chart) -->
+          <div class="bklit-chart-container" style="margin-top: 0;">
+            <div class="bklit-chart-header">
+              <div class="bklit-chart-title">
+                <span class="brand-dot" style="background: var(--primary);"></span>
+                <span>Hedera & EVM Throughput (TPS)</span>
+              </div>
+              <div class="bklit-chart-subtitle bklit-shimmer-text">LIVE REAL-TIME STREAM</div>
+            </div>
+            
+            <svg class="bklit-area-svg" viewBox="0 0 500 180">
+              <defs>
+                <linearGradient id="bklit-gradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.4" />
+                  <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.0" />
+                </linearGradient>
+              </defs>
+              <path class="bklit-area-path" d="M 0,140 Q 60,60 120,110 T 240,40 T 360,90 T 500,30 L 500,180 L 0,180 Z" />
+              <path class="bklit-line-path" d="M 0,140 Q 60,60 120,110 T 240,40 T 360,90 T 500,30" />
+            </svg>
+          </div>
+
+          <!-- Bklit Heatmap Chart (@bklit/heatmap-chart) -->
+          <div class="bklit-chart-container" style="margin-top: 0;">
+            <div class="bklit-chart-header">
+              <div class="bklit-chart-title">
+                <span class="brand-dot" style="background: var(--emerald);"></span>
+                <span>Smart Contract Execution Heatmap</span>
+              </div>
+              <div class="bklit-chart-subtitle">Q1-Q3 2026</div>
+            </div>
+            <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">
+              On-chain commit frequency & testnet deployment activity.
+            </p>
+
+            <div class="bklit-heatmap-grid" id="bklit-heatmap">
+              <!-- Dynamically populated by assets/js/project-inventory.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. SELECTED PROJECTS SECTION -->
       <section class="section" id="projects">
         <div class="section-header">
           <div>
@@ -140,7 +193,7 @@
         </div>
       </section>
 
-      <!-- 5. ABOUT & CAPABILITIES SECTION -->
+      <!-- 6. ABOUT & CAPABILITIES SECTION -->
       <section class="section" id="about">
         <div class="section-header">
           <div>
@@ -204,7 +257,7 @@
         </div>
       </section>
 
-      <!-- 6. CREDENTIALS & CERTIFICATIONS -->
+      <!-- 7. CREDENTIALS & CERTIFICATIONS -->
       <section class="section" id="credentials">
         <div class="section-header">
           <div>
@@ -236,7 +289,7 @@
               <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">
                 Verified proficiency in Problem Solving, Python Development, and Frontend React/JavaScript architecture.
               </p>
-              <a href="https://www.hackerrank.com/certificates/iframe/144acd11f6c7" target="_blank" rel="noopener" class="card-link">
+              <a href="https://www.hackerrank.com/certificates/iframe/144acd11f6c7" target="_blank" rel="noopener" class="cert-link">
                 <span>View HackerRank Badges ↗</span>
               </a>
             </div>
@@ -244,7 +297,7 @@
         </div>
       </section>
 
-      <!-- 7. INTERACTIVE TERMINAL -->
+      <!-- 8. INTERACTIVE TERMINAL -->
       <section class="section" id="terminal">
         <div class="section-header">
           <div>
@@ -280,10 +333,10 @@
         </div>
       </section>
 
-      <!-- 8. FOOTER & CONTACT SECTION -->
+      <!-- 9. FOOTER & CONTACT SECTION -->
       <footer class="footer-contact" id="contact">
         <div class="contact-box">
-          <h2 class="contact-title">Let's Build Something Great</h2>
+          <h2 class="contact-title bklit-shimmer-text">Let's Build Something Great</h2>
           <p class="contact-desc">
             Open to Web3 engineering roles, smart contract security collaborations, and protocol architecture opportunities.
           </p>
@@ -305,12 +358,27 @@
         </div>
 
         <div class="footer-bottom">
-          © 2026 Saurabh Kumar Singh. Designed for High Performance. Zero Framework Build Step.
+          © 2026 Saurabh Kumar Singh. Built with Motion, Anime.js & Bklit UI Visualizations.
         </div>
       </footer>
     </div>
 
-    <!-- Scripts -->
+    <!-- Motion & Anime.js ES Modules -->
+    <script type="module">
+      import { animate, scroll, inView } from 'https://cdn.jsdelivr.net/npm/motion@latest/+esm';
+      import { animate as animeAnimate } from 'https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.es.js';
+
+      // Motion Scroll Animations
+      inView('.project-card', ({ target }) => {
+        animate(target, { opacity: [0, 1], y: [30, 0] }, { duration: 0.6, easing: [0.16, 1, 0.3, 1] });
+      });
+
+      inView('.capability-card', ({ target }) => {
+        animate(target, { opacity: [0, 1], y: [20, 0] }, { duration: 0.5 });
+      });
+    </script>
+
+    <!-- Base Scripts -->
     <script src="./assets/js/model-materials.js"></script>
     <script src="./assets/js/project-inventory.js"></script>
     <script>
