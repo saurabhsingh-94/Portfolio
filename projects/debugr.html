@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debugr — Smart Contract Inspector — Case Study | Saurabh Kumar Singh</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      .case-study-hero { padding: 60px 0 40px; border-bottom: 1px solid var(--line); }
+      .back-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+      .back-link:hover { color: var(--red); }
+      .case-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; padding: 60px 0; }
+      .case-block { margin-bottom: 40px; }
+      .case-block h2 { font-size: 24px; font-weight: 900; margin-bottom: 16px; }
+      .case-sidebar { background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; height: fit-content; box-shadow: var(--shadow-soft); }
+      .meta-group { margin-bottom: 24px; }
+      .meta-label { font-size: 12px; font-weight: 800; font-family: var(--font-mono); color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+      .meta-val { font-size: 15px; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="header-nav">
+        <a href="../index.html" class="brand-container">
+          <span class="brand-cube"></span>
+          <span>SAURABH KUMAR SINGH</span>
+        </a>
+        <div class="nav-links">
+          <a href="../index.html#projects">Selected Work</a>
+          <a href="../index.html#about">Capabilities</a>
+          <a href="../index.html#credentials">Credentials</a>
+        </div>
+        <div class="nav-cta-group">
+          <a href="../index.html#contact" class="btn red">
+            <span>Get in Touch</span>
+            <span class="btn-cube"></span>
+          </a>
+        </div>
+      </nav>
+
+      <section class="case-study-hero">
+        <a href="../index.html#projects" class="back-link">← Back to Portfolio</a>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+          <span class="status-badge prototype">Prototype</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; color: var(--muted);">Smart Contract Tooling</span>
+        </div>
+        <h1 style="font-size: clamp(36px, 4vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 20px;">
+          Debugr — Smart Contract Inspector
+        </h1>
+        <p style="font-size: 18px; color: var(--muted); max-width: 760px;">
+          Interactive developer tool suite for dissecting EVM smart contract execution traces, decoding ABI function calls, and highlighting state mutations.
+        </p>
+      </section>
+
+      <div class="case-grid">
+        <main class="case-content">
+          <div class="case-block">
+            <h2>1. What It Is</h2>
+            <p>
+              Debugr is a developer inspection platform designed to parse EVM transaction logs, match raw bytes against contract ABIs, and display readable state changes.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>2. Why It Exists</h2>
+            <p>
+              Auditing smart contract behavior on testnet requires rapid feedback on storage slot changes, internal call stacks, and re-entrancy risks.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>3. Problem</h2>
+            <p>
+              Raw execution traces on public block explorers are formatted for machine consumption, making security analysis tedious for developers.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>4. Solution</h2>
+            <p>
+              Created an ABI decoding pipeline in TypeScript that maps event logs, decodes function arguments, and renders storage diffs.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>5. Experience Created</h2>
+            <p>
+              A side-by-side inspection view with step-by-step transaction trace highlights and storage mutation flags.
+            </p>
+          </div>
+        </main>
+
+        <aside class="case-sidebar">
+          <div class="meta-group">
+            <div class="meta-label">Status</div>
+            <div class="meta-val"><span class="status-badge prototype">Prototype</span></div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Role</div>
+            <div class="meta-val">Creator & Developer</div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Ownership</div>
+            <div class="meta-val">Personal Open Source</div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Tech Stack</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">
+              <span class="tag-pill">TypeScript</span>
+              <span class="tag-pill">React</span>
+              <span class="tag-pill">Node.js</span>
+              <span class="tag-pill">Ethers.js</span>
+            </div>
+          </div>
+          <div class="meta-group" style="margin-bottom: 0;">
+            <div class="meta-label">Repository</div>
+            <div class="meta-val">
+              <a href="https://github.com/saurabhsingh-94/debugr-" target="_blank" class="card-link">
+                github.com/saurabhsingh-94/debugr- ↗
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>

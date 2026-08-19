@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Dev Data Taxonomy — Case Study | Saurabh Kumar Singh</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      .case-study-hero { padding: 60px 0 40px; border-bottom: 1px solid var(--line); }
+      .back-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+      .back-link:hover { color: var(--red); }
+      .case-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; padding: 60px 0; }
+      .case-block { margin-bottom: 40px; }
+      .case-block h2 { font-size: 24px; font-weight: 900; margin-bottom: 16px; }
+      .case-sidebar { background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; height: fit-content; box-shadow: var(--shadow-soft); }
+      .meta-group { margin-bottom: 24px; }
+      .meta-label { font-size: 12px; font-weight: 800; font-family: var(--font-mono); color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+      .meta-val { font-size: 15px; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="header-nav">
+        <a href="../index.html" class="brand-container">
+          <span class="brand-cube"></span>
+          <span>SAURABH KUMAR SINGH</span>
+        </a>
+        <div class="nav-links">
+          <a href="../index.html#projects">Selected Work</a>
+          <a href="../index.html#about">Capabilities</a>
+          <a href="../index.html#credentials">Credentials</a>
+        </div>
+        <div class="nav-cta-group">
+          <a href="../index.html#contact" class="btn red">
+            <span>Get in Touch</span>
+            <span class="btn-cube"></span>
+          </a>
+        </div>
+      </nav>
+
+      <section class="case-study-hero">
+        <a href="../index.html#projects" class="back-link">← Back to Portfolio</a>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+          <span class="status-badge experiment">Experiment</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; color: var(--muted);">Data Taxonomy & Research</span>
+        </div>
+        <h1 style="font-size: clamp(36px, 4vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 20px;">
+          Open Dev Data Taxonomy
+        </h1>
+        <p style="font-size: 18px; color: var(--muted); max-width: 760px;">
+          An open taxonomy and dataset specification categorizing cryptocurrency ecosystems, developer metrics, and protocol architecture.
+        </p>
+      </section>
+
+      <div class="case-grid">
+        <main class="case-content">
+          <div class="case-block">
+            <h2>1. What It Is</h2>
+            <p>
+              Open Dev Data is a standardized categorization schema for open-source cryptocurrency repositories, developer activity metrics, and protocol infrastructure layers.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>2. Why It Exists</h2>
+            <p>
+              Analyzing open-source ecosystem growth across thousands of independent GitHub organizations requires a unified data schema to track active contributors, commit frequency, and protocol dependencies.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>3. Problem</h2>
+            <p>
+              Decentralized ecosystem metrics are fragmented, making cross-chain comparisons inconsistent or biased toward single metrics like star counts.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>4. Solution</h2>
+            <p>
+              Designed a hierarchical taxonomy mapping projects into Layer 0/1/2 infrastructure, smart contract primitives, tooling, and application layers with JSON/YAML schema definitions.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>5. Experience Created</h2>
+            <p>
+              An open, documented taxonomy specification for researchers and Web3 analysts.
+            </p>
+          </div>
+        </main>
+
+        <aside class="case-sidebar">
+          <div class="meta-group">
+            <div class="meta-label">Status</div>
+            <div class="meta-val"><span class="status-badge experiment">Experiment</span></div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Role</div>
+            <div class="meta-val">Data Architect & Researcher</div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Ownership</div>
+            <div class="meta-val">Personal Open Source</div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Tech Stack</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">
+              <span class="tag-pill">JSON Schema</span>
+              <span class="tag-pill">YAML</span>
+              <span class="tag-pill">Markdown</span>
+              <span class="tag-pill">Metrics Architecture</span>
+            </div>
+          </div>
+          <div class="meta-group" style="margin-bottom: 0;">
+            <div class="meta-label">Repository</div>
+            <div class="meta-val">
+              <a href="https://github.com/saurabhsingh-94/open-dev-data" target="_blank" class="card-link">
+                github.com/saurabhsingh-94/open-dev-data ↗
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>

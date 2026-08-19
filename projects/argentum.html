@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Argentum [Ag] — Case Study | Saurabh Kumar Singh</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      .case-study-hero {
+        padding: 60px 0 40px;
+        border-bottom: 1px solid var(--line);
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 800;
+        font-size: 14px;
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+      .back-link:hover { color: var(--red); }
+      .case-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 48px;
+        padding: 60px 0;
+      }
+      .case-block {
+        margin-bottom: 40px;
+      }
+      .case-block h2 {
+        font-size: 24px;
+        font-weight: 900;
+        margin-bottom: 16px;
+      }
+      .case-sidebar {
+        background: var(--card-bg);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 32px;
+        height: fit-content;
+        box-shadow: var(--shadow-soft);
+      }
+      .meta-group {
+        margin-bottom: 24px;
+      }
+      .meta-label {
+        font-size: 12px;
+        font-weight: 800;
+        font-family: var(--font-mono);
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .meta-val {
+        font-size: 15px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="header-nav">
+        <a href="../index.html" class="brand-container">
+          <span class="brand-cube"></span>
+          <span>SAURABH KUMAR SINGH</span>
+        </a>
+        <div class="nav-links">
+          <a href="../index.html#projects">Selected Work</a>
+          <a href="../index.html#about">Capabilities</a>
+          <a href="../index.html#credentials">Credentials</a>
+        </div>
+        <div class="nav-cta-group">
+          <a href="../index.html#contact" class="btn red">
+            <span>Get in Touch</span>
+            <span class="btn-cube"></span>
+          </a>
+        </div>
+      </nav>
+
+      <section class="case-study-hero">
+        <a href="../index.html#projects" class="back-link">← Back to Portfolio</a>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+          <span class="status-badge prototype">Prototype</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; color: var(--muted);">Web3 Social Protocol</span>
+        </div>
+        <h1 style="font-size: clamp(36px, 4vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 20px;">
+          Argentum [Ag] — Build in Public, Prove it Forever
+        </h1>
+        <p style="font-size: 18px; color: var(--muted); max-width: 760px;">
+          A Web3 social space for open-source builders to post real-time build logs and secure cryptographic proof of creation directly on-chain.
+        </p>
+      </section>
+
+      <div class="case-grid">
+        <main class="case-content">
+          <div class="case-block">
+            <h2>1. What It Is</h2>
+            <p>
+              Argentum is a decentralized "Twitter for Devs" protocol. It enables developers to maintain a public stream of real-time build updates, snippets, and project milestones while automatically anchoring immutable timestamped hashes onto the blockchain.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>2. Why It Exists</h2>
+            <p>
+              Open-source creators frequently share code progress on centralized social platforms like X/Twitter or Reddit. However, centralized posts lack verifiable proof of authorship, can be retroactively altered, or get suppressed by opaque algorithms. Argentum solves this by combining developer social sharing with on-chain cryptographic anchoring.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>3. Problem</h2>
+            <p>
+              Establishing clear proof-of-creation for early-stage prototypes before filing patents or releasing public repositories is difficult. Creators need a seamless mechanism to prove "I built this at timestamp X" without relying on centralized platform authority.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>4. Solution</h2>
+            <p>
+              Argentum implements an on-chain build logging system:
+            </p>
+            <ul style="margin-left: 24px; margin-top: 12px; line-height: 1.8;">
+              <li>Log entries are hashed locally using SHA-256 and stored on IPFS.</li>
+              <li>The resulting content identifier (CID) is anchored onto Ethereum/EVM smart contracts.</li>
+              <li>A clean React/Next.js interface allows visitors to browse developer feeds and verify cryptographic proof with one click.</li>
+            </ul>
+          </div>
+
+          <div class="case-block">
+            <h2>5. Experience Created</h2>
+            <p>
+              A fast, tactile developer feed displaying real-time build logs, transaction hashes, IPFS content links, and interactive verification drawer.
+            </p>
+          </div>
+        </main>
+
+        <aside class="case-sidebar">
+          <div class="meta-group">
+            <div class="meta-label">Status</div>
+            <div class="meta-val"><span class="status-badge prototype">Prototype</span></div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Role</div>
+            <div class="meta-val">Lead Web3 Engineer</div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Ownership</div>
+            <div class="meta-val">Personal Project</div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Tech Stack</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">
+              <span class="tag-pill">TypeScript</span>
+              <span class="tag-pill">React</span>
+              <span class="tag-pill">Next.js</span>
+              <span class="tag-pill">Solidity</span>
+              <span class="tag-pill">Ethers.js</span>
+              <span class="tag-pill">IPFS</span>
+            </div>
+          </div>
+          <div class="meta-group" style="margin-bottom: 0;">
+            <div class="meta-label">Repository</div>
+            <div class="meta-val">
+              <a href="https://github.com/saurabhsingh-94/Argentum-" target="_blank" class="card-link">
+                github.com/saurabhsingh-94/Argentum- ↗
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>

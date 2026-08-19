@@ -1,0 +1,325 @@
+{
+  "schemaVersion": 1,
+  "allowedValues": {
+    "ownership": ["personal", "team", "client", "unknown"],
+    "status": [
+      "Production",
+      "Prototype",
+      "Experiment",
+      "Concept",
+      "In Progress"
+    ],
+    "publication": ["published", "draft", "planned"],
+    "demoType": ["live", "video", "screenshot", "none"]
+  },
+  "projects": [
+    {
+      "id": "argentum",
+      "slug": "argentum",
+      "title": "Argentum [Ag]",
+      "source": "existing",
+      "ownership": "personal",
+      "status": "Prototype",
+      "publication": "published",
+      "summary": "Build in public, prove it forever. A Web3 social space for builders to log real-time updates and secure proof of work on-chain.",
+      "whatItIs": "A decentralized 'Twitter for Devs' where creators share progress logs, code snippets, and anchor proof of build history directly onto the blockchain.",
+      "whyItExists": "To give open-source builders an tamper-proof way to establish proof of creation and build in public with cryptographic authenticity.",
+      "problem": "Traditional developer updates on centralized social platforms lack verifiable proof of ownership and can be silenced or tampered with.",
+      "solution": "Built an on-chain build-logging protocol with cryptographic timestamping and decentralized storage for developer logs.",
+      "experience": "A clean, modern social interface for developers to post build logs, inspect cryptographic hashes, and verify project history.",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Solidity",
+        "Ethers.js",
+        "IPFS / Decentralized Storage",
+        "Tailwind CSS"
+      ],
+      "role": [
+        "Lead Web3 Engineer",
+        "Smart Contract Architecture",
+        "Frontend Interface & State Management"
+      ],
+      "team": [],
+      "demo": {
+        "type": "live",
+        "url": "https://github.com/saurabhsingh-94/Argentum-",
+        "assets": []
+      },
+      "links": {
+        "caseStudy": "projects/argentum.html",
+        "live": "https://github.com/saurabhsingh-94/Argentum-",
+        "repository": "https://github.com/saurabhsingh-94/Argentum-"
+      },
+      "presentation": {
+        "homepage": {
+          "visible": true,
+          "order": 1,
+          "description": "Build in Public Protocol • On-chain Proof • Developer Social",
+          "previewAlt": "Argentum Web3 Developer Social Platform",
+          "badgeClass": "prototype"
+        }
+      },
+      "notes": [
+        "Active prototype undergoing smart contract auditing and testnet deployment."
+      ],
+      "needsConfirmation": []
+    },
+    {
+      "id": "hedera-visualizer",
+      "slug": "hedera-visualizer",
+      "title": "Hedera Multi-Chain Visualizer",
+      "source": "existing",
+      "ownership": "personal",
+      "status": "Production",
+      "publication": "published",
+      "summary": "Real-time cross-chain consensus & network throughput visualizer covering Hedera Hashgraph, Bitcoin, Ethereum, Solana, and Polygon.",
+      "whatItIs": "An interactive WebGL/Canvas visualizer rendering live transaction throughput, block consensus, and latency across major DLT networks.",
+      "whyItExists": "To visually demonstrate the speed and consensus difference between classic Proof-of-Work / Proof-of-Stake blockchains and Hedera's Hashgraph DAG consensus.",
+      "problem": "Comparing blockchain speeds and finality times textually fails to convey real-world consensus dynamics to stakeholders and developers.",
+      "solution": "Engineered real-time WebSocket feeds connected to network nodes rendering high-fps visual particle streams per transaction.",
+      "experience": "High-performance visual dashboard with live toggle controls across Hedera, Bitcoin, Ethereum, Solana, and Polygon.",
+      "technologies": [
+        "JavaScript (ES6+)",
+        "HTML5 Canvas API",
+        "WebSockets",
+        "Hedera SDK & Mirror Node APIs",
+        "CSS3 Animations"
+      ],
+      "role": [
+        "Solo Creator & Developer",
+        "WebSocket Engine Architecture",
+        "Canvas Rendering Pipeline"
+      ],
+      "team": [],
+      "demo": {
+        "type": "live",
+        "url": "https://github.com/saurabhsingh-94/hedera-visualizer",
+        "assets": []
+      },
+      "links": {
+        "caseStudy": "projects/hedera-visualizer.html",
+        "live": "https://github.com/saurabhsingh-94/hedera-visualizer",
+        "repository": "https://github.com/saurabhsingh-94/hedera-visualizer"
+      },
+      "presentation": {
+        "homepage": {
+          "visible": true,
+          "order": 2,
+          "description": "Multi-chain Visualizer • Hedera Hashgraph • Real-time WebSockets",
+          "previewAlt": "Hedera Cross-Chain Consensus Visualizer Interface",
+          "badgeClass": "production"
+        }
+      },
+      "notes": [
+        "Shipped & public open-source project."
+      ],
+      "needsConfirmation": []
+    },
+    {
+      "id": "nexadefi-dashboard",
+      "slug": "nexadefi-dashboard",
+      "title": "NexaDeFi Platform & DEX",
+      "source": "existing",
+      "ownership": "personal",
+      "status": "Production",
+      "publication": "published",
+      "summary": "Full-stack Web3 Decentralized Finance dashboard featuring automated DEX token swaps, staking liquidity pools, and MetaMask integration.",
+      "whatItIs": "A comprehensive DeFi platform enabling seamless token swaps, liquidity provision, yield calculation, and real-time wallet portfolio inspection.",
+      "whyItExists": "To showcase end-to-end Web3 fullstack architecture integrating smart contracts with responsive, high-speed dApp user interfaces.",
+      "problem": "DeFi interfaces are often cluttered and intimidating for non-expert users.",
+      "solution": "Designed a sleek, reactive UI with intuitive slip-tolerance controls, gas estimation, and dynamic transaction notification toasts.",
+      "experience": "A responsive, glassmorphic DeFi application with instant wallet connect and real-time market rate charts.",
+      "technologies": [
+        "Next.js",
+        "React",
+        "Tailwind CSS",
+        "Ethers.js / Web3.js",
+        "Solidity",
+        "MetaMask Provider API"
+      ],
+      "role": [
+        "Full-Stack Web3 Developer",
+        "UI Component Design",
+        "Smart Contract Integration"
+      ],
+      "team": [],
+      "demo": {
+        "type": "live",
+        "url": "https://github.com/saurabhsingh-94/defi-app",
+        "assets": []
+      },
+      "links": {
+        "caseStudy": "projects/nexadefi-dashboard.html",
+        "live": "https://github.com/saurabhsingh-94/defi-app",
+        "repository": "https://github.com/saurabhsingh-94/defi-app"
+      },
+      "presentation": {
+        "homepage": {
+          "visible": true,
+          "order": 3,
+          "description": "DeFi Protocol • DEX Token Swap • Staking Vaults • Next.js",
+          "previewAlt": "NexaDeFi Web3 Dashboard Interface",
+          "badgeClass": "production"
+        }
+      },
+      "notes": [
+        "Live open-source repository."
+      ],
+      "needsConfirmation": []
+    },
+    {
+      "id": "crypto-portfolio-tracker",
+      "slug": "crypto-portfolio-tracker",
+      "title": "Crypto Portfolio Tracker CLI",
+      "source": "existing",
+      "ownership": "personal",
+      "status": "Production",
+      "publication": "published",
+      "summary": "Terminal-based cryptocurrency portfolio manager powered by CoinGecko API and Hedera Token Service (HTS) integration.",
+      "whatItIs": "A high-efficiency CLI tool that monitors live market rates, calculates profit/loss per asset, tracks HTS tokens, and visualizes investment targets.",
+      "whyItExists": "Developers spend considerable time in the terminal; having a rapid, zero-overhead portfolio inspector eliminates switching context to heavy browser tabs.",
+      "problem": "Web dashboards are bloated and slow when all a developer needs is a instant command-line check of their token portfolio status.",
+      "solution": "Built a modular Python CLI with colorized formatted tables, JSON state persistence, multi-currency conversion, and CoinGecko API integration.",
+      "experience": "A crisp, color-coded terminal dashboard that loads under 200ms.",
+      "technologies": [
+        "Python 3",
+        "CoinGecko REST API",
+        "Hedera HTS SDK",
+        "Colorama / Rich",
+        "JSON Storage Engine"
+      ],
+      "role": [
+        "Solo Python Developer",
+        "API Integration",
+        "CLI UX & Data Persistence"
+      ],
+      "team": [],
+      "demo": {
+        "type": "live",
+        "url": "https://github.com/saurabhsingh-94/crypto-portfolio-tracker",
+        "assets": []
+      },
+      "links": {
+        "caseStudy": "projects/crypto-portfolio-tracker.html",
+        "live": "https://github.com/saurabhsingh-94/crypto-portfolio-tracker",
+        "repository": "https://github.com/saurabhsingh-94/crypto-portfolio-tracker"
+      },
+      "presentation": {
+        "homepage": {
+          "visible": true,
+          "order": 4,
+          "description": "Python CLI • CoinGecko API • Hedera HTS • Terminal UX",
+          "previewAlt": "Terminal Crypto Portfolio Tracker Output",
+          "badgeClass": "production"
+        }
+      },
+      "notes": [
+        "Published open-source Python tool."
+      ],
+      "needsConfirmation": []
+    },
+    {
+      "id": "debugr",
+      "slug": "debugr",
+      "title": "Debugr — Smart Contract Inspector",
+      "source": "existing",
+      "ownership": "personal",
+      "status": "Prototype",
+      "publication": "published",
+      "summary": "Interactive developer suite for inspecting EVM smart contract state diffs, execution traces, and ABI event decoding.",
+      "whatItIs": "A lightweight developer tool that dissects Ethereum / EVM transaction logs, decodes function call signatures, and flags potential security pitfalls.",
+      "whyItExists": "To simplify debugging for smart contract developers and security auditors before deploying to mainnet.",
+      "problem": "Debugging raw bytecodes and unformatted logs on block explorers is slow and error-prone.",
+      "solution": "Created an automated parser that binds contract ABIs to raw transaction logs and highlights state storage modifications.",
+      "experience": "A clean side-by-side transaction trace inspector with syntax-highlighted storage variables.",
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Ethers.js / Viem",
+        "EVM Bytecode Parser"
+      ],
+      "role": [
+        "Creator & Developer",
+        "ABI Parser Implementation",
+        "Dev Tool UI"
+      ],
+      "team": [],
+      "demo": {
+        "type": "live",
+        "url": "https://github.com/saurabhsingh-94/debugr-",
+        "assets": []
+      },
+      "links": {
+        "caseStudy": "projects/debugr.html",
+        "live": "https://github.com/saurabhsingh-94/debugr-",
+        "repository": "https://github.com/saurabhsingh-94/debugr-"
+      },
+      "presentation": {
+        "homepage": {
+          "visible": true,
+          "order": 5,
+          "description": "Dev Suite • EVM Trace Inspector • ABI Decoding • TypeScript",
+          "previewAlt": "Debugr Smart Contract Inspector Screenshot",
+          "badgeClass": "prototype"
+        }
+      },
+      "notes": [
+        "Active developer tool prototype."
+      ],
+      "needsConfirmation": []
+    },
+    {
+      "id": "open-dev-data",
+      "slug": "open-dev-data",
+      "title": "Open Dev Data Taxonomy",
+      "source": "existing",
+      "ownership": "personal",
+      "status": "Experiment",
+      "publication": "published",
+      "summary": "An open taxonomy, metric framework, and dataset mapping cryptocurrency, blockchain, and decentralized ecosystems.",
+      "whatItIs": "A structured data taxonomy categorizing open-source Web3 repositories, protocol layers, developer activity metrics, and ecosystem governance.",
+      "whyItExists": "To create a standardized framework for analyzing developer growth and technical adoption across crypto networks.",
+      "problem": "Decentralized ecosystem data is scattered across thousands of disparate repositories without a unified taxonomy.",
+      "solution": "Designed a systematic taxonomy organizing projects by L0/L1/L2 infrastructure, middleware, primitives, and application layers.",
+      "experience": "An extensible data specification and documentation standard for researchers and builders.",
+      "technologies": [
+        "Open Data Schema",
+        "JSON / YAML Taxonomy",
+        "Markdown Specification",
+        "Developer Metrics Mapping"
+      ],
+      "role": [
+        "Data Architect & Researcher",
+        "Taxonomy Definition",
+        "Ecosystem Metrics Structuring"
+      ],
+      "team": [],
+      "demo": {
+        "type": "live",
+        "url": "https://github.com/saurabhsingh-94/open-dev-data",
+        "assets": []
+      },
+      "links": {
+        "caseStudy": "projects/open-dev-data.html",
+        "live": "https://github.com/saurabhsingh-94/open-dev-data",
+        "repository": "https://github.com/saurabhsingh-94/open-dev-data"
+      },
+      "presentation": {
+        "homepage": {
+          "visible": true,
+          "order": 6,
+          "description": "Data Taxonomy • Crypto Metrics • Open Source Research",
+          "previewAlt": "Open Dev Data Taxonomy Mapping",
+          "badgeClass": "experiment"
+        }
+      },
+      "notes": [
+        "Open-source data experiment."
+      ],
+      "needsConfirmation": []
+    }
+  ]
+}

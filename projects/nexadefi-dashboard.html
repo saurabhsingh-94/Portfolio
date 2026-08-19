@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexaDeFi Platform & DEX — Case Study | Saurabh Kumar Singh</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      .case-study-hero { padding: 60px 0 40px; border-bottom: 1px solid var(--line); }
+      .back-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+      .back-link:hover { color: var(--red); }
+      .case-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; padding: 60px 0; }
+      .case-block { margin-bottom: 40px; }
+      .case-block h2 { font-size: 24px; font-weight: 900; margin-bottom: 16px; }
+      .case-sidebar { background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; height: fit-content; box-shadow: var(--shadow-soft); }
+      .meta-group { margin-bottom: 24px; }
+      .meta-label { font-size: 12px; font-weight: 800; font-family: var(--font-mono); color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+      .meta-val { font-size: 15px; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="header-nav">
+        <a href="../index.html" class="brand-container">
+          <span class="brand-cube"></span>
+          <span>SAURABH KUMAR SINGH</span>
+        </a>
+        <div class="nav-links">
+          <a href="../index.html#projects">Selected Work</a>
+          <a href="../index.html#about">Capabilities</a>
+          <a href="../index.html#credentials">Credentials</a>
+        </div>
+        <div class="nav-cta-group">
+          <a href="../index.html#contact" class="btn red">
+            <span>Get in Touch</span>
+            <span class="btn-cube"></span>
+          </a>
+        </div>
+      </nav>
+
+      <section class="case-study-hero">
+        <a href="../index.html#projects" class="back-link">← Back to Portfolio</a>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+          <span class="status-badge production">Production</span>
+          <span style="font-family: var(--font-mono); font-size: 13px; color: var(--muted);">Fullstack Web3 dApp</span>
+        </div>
+        <h1 style="font-size: clamp(36px, 4vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 20px;">
+          NexaDeFi Platform & DEX Swap
+        </h1>
+        <p style="font-size: 18px; color: var(--muted); max-width: 760px;">
+          A full-stack Web3 decentralized finance platform featuring automated DEX token swaps, liquidity pool staking, and real-time MetaMask integration.
+        </p>
+      </section>
+
+      <div class="case-grid">
+        <main class="case-content">
+          <div class="case-block">
+            <h2>1. What It Is</h2>
+            <p>
+              NexaDeFi is a Web3 decentralized exchange and yield platform built with Next.js, React, and Ethers.js. It allows users to connect Web3 wallets, execute instant token swaps, inspect slippage tolerances, and stake LP tokens into liquidity yield vaults.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>2. Why It Exists</h2>
+            <p>
+              Many existing DeFi portals are cumbersome, slow to respond, or lack clear transaction states when interacting with smart contracts. NexaDeFi was created as an optimized, responsive full-stack implementation prioritizing user feedback and security.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>3. Problem</h2>
+            <p>
+              Users frequently experience failed transactions or unexpected slippage when interacting with DEX smart contracts without real-time gas checks or transaction simulation feedback.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>4. Solution</h2>
+            <p>
+              Developed a unified Web3 provider layer with Ethers.js that pre-estimates gas limits, monitors pending transaction lifecycle events, and alerts users of price impacts before signatures are requested.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <h2>5. Experience Created</h2>
+            <p>
+              A glassmorphic Web3 interface with token selector modals, real-time rate updates, staking yield calculators, and dark mode controls.
+            </p>
+          </div>
+        </main>
+
+        <aside class="case-sidebar">
+          <div class="meta-group">
+            <div class="meta-label">Status</div>
+            <div class="meta-val"><span class="status-badge production">Production</span></div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Role</div>
+            <div class="meta-val">Full-Stack Web3 Developer</div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Ownership</div>
+            <div class="meta-val">Personal Open Source</div>
+          </div>
+          <div class="meta-group">
+            <div class="meta-label">Tech Stack</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">
+              <span class="tag-pill">Next.js</span>
+              <span class="tag-pill">React</span>
+              <span class="tag-pill">Tailwind CSS</span>
+              <span class="tag-pill">Ethers.js</span>
+              <span class="tag-pill">Solidity</span>
+            </div>
+          </div>
+          <div class="meta-group" style="margin-bottom: 0;">
+            <div class="meta-label">Repository</div>
+            <div class="meta-val">
+              <a href="https://github.com/saurabhsingh-94/defi-app" target="_blank" class="card-link">
+                github.com/saurabhsingh-94/defi-app ↗
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
