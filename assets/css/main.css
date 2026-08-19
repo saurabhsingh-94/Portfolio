@@ -1,6 +1,6 @@
 /* ==========================================================================
-   SAURABH KUMAR SINGH — WEB3 ARCHITECT & FULL-STACK SYSTEMS ENGINEER
-   Obsidian Glassmorphic System + Bklit UI + Motion & Anime.js Integration
+   SAURABH KUMAR SINGH — CREATIVE DEVELOPER & SYSTEMS ENGINEER
+   Obsidian Glassmorphic + Bklit UI + Anime.js v4 + Motion Engine Suite
    ========================================================================== */
 
 :root {
@@ -12,17 +12,18 @@
   --line-strong: rgba(255, 255, 255, 0.16);
   
   --primary: #0ea5e9;
-  --primary-glow: rgba(14, 165, 233, 0.25);
+  --primary-glow: rgba(14, 165, 233, 0.3);
   --cyan: #38bdf8;
   --emerald: #10b981;
   --indigo: #6366f1;
+  --purple: #a855f7;
   --red: #ef4444;
   --yellow: #f59e0b;
 
-  --card-bg: rgba(15, 23, 42, 0.65);
-  --card-hover: rgba(30, 41, 59, 0.85);
+  --card-bg: rgba(15, 23, 42, 0.7);
+  --card-hover: rgba(30, 41, 59, 0.9);
   --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 30px rgba(14, 165, 233, 0.12);
+  --shadow-glow: 0 0 35px rgba(14, 165, 233, 0.15);
   --radius: 16px;
   --radius-sm: 8px;
 
@@ -78,6 +79,18 @@ button {
   margin: 0 auto;
 }
 
+/* Scroll Progress Indicator */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0ea5e9, #6366f1, #10b981);
+  width: 0%;
+  z-index: 10000;
+  box-shadow: 0 0 10px #0ea5e9;
+}
+
 /* ==========================================================================
    BKLIT UI: SHIMMERING TEXT COMPONENT (@bklit/shimmering-text)
    ========================================================================== */
@@ -94,7 +107,7 @@ button {
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: bklitShimmer 4s linear infinite;
+  animation: bklitShimmer 3.5s linear infinite;
   display: inline-block;
 }
 
@@ -104,16 +117,23 @@ button {
 }
 
 /* ==========================================================================
-   BKLIT UI: AREA CHART & HEATMAP VISUALIZATIONS (@bklit/area-chart, @bklit/heatmap-chart)
+   BKLIT UI FULL CHART SUITE (@bklit/area-chart, @bklit/line-chart, @bklit/heatmap-chart)
    ========================================================================== */
-.bklit-chart-container {
+.bklit-chart-card {
   background: var(--card-bg);
   backdrop-filter: blur(16px);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   padding: 28px;
   box-shadow: var(--shadow);
-  margin-top: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.bklit-chart-card:hover {
+  border-color: rgba(14, 165, 233, 0.4);
+  box-shadow: var(--shadow), var(--shadow-glow);
 }
 
 .bklit-chart-header {
@@ -137,58 +157,108 @@ button {
   color: var(--muted);
 }
 
-.bklit-area-svg {
+/* SVG Chart Elements */
+.bklit-chart-svg {
   width: 100%;
-  height: 220px;
+  height: 200px;
   overflow: visible;
 }
 
-.bklit-area-path {
-  fill: url(#bklit-gradient);
-  stroke: var(--primary);
-  stroke-width: 2.5;
+.bklit-area-fill {
+  fill: url(#bklit-area-gradient);
+  opacity: 0.85;
+}
+
+.bklit-line-stroke {
+  fill: none;
+  stroke: #0ea5e9;
+  stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.bklit-line-path {
+.bklit-line-secondary {
   fill: none;
-  stroke: var(--cyan);
+  stroke: #10b981;
   stroke-width: 2.5;
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  animation: bklitDash 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  stroke-dasharray: 4;
 }
 
-@keyframes bklitDash {
-  to { stroke-dashoffset: 0; }
+.bklit-dot {
+  fill: #0ea5e9;
+  stroke: #ffffff;
+  stroke-width: 2;
+  cursor: pointer;
+  transition: r 0.2s ease, fill 0.2s ease;
 }
 
-/* Heatmap Grid (@bklit/heatmap-chart) */
+.bklit-dot:hover {
+  r: 7;
+  fill: #38bdf8;
+}
+
+/* Bklit Tooltip */
+.bklit-tooltip {
+  position: absolute;
+  padding: 8px 14px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: #ffffff;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  z-index: 50;
+}
+
+.bklit-tooltip.active {
+  opacity: 1;
+}
+
+/* Bklit Heatmap Chart (@bklit/heatmap-chart) */
+.bklit-heatmap-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bklit-heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  margin-top: 12px;
+}
+
 .bklit-heatmap-grid {
   display: grid;
-  grid-template-columns: repeat(26, 1fr);
-  gap: 4px;
-  margin-top: 16px;
+  grid-template-columns: repeat(28, 1fr);
+  gap: 5px;
 }
 
 .bklit-heatmap-cell {
   height: 14px;
   border-radius: 3px;
   background: rgba(255, 255, 255, 0.05);
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
   cursor: pointer;
 }
 
 .bklit-heatmap-cell:hover {
-  transform: scale(1.3);
+  transform: scale(1.35);
+  z-index: 10;
   box-shadow: 0 0 10px var(--primary-glow);
 }
 
 .bklit-heatmap-cell[data-level="1"] { background: rgba(14, 165, 233, 0.25); }
 .bklit-heatmap-cell[data-level="2"] { background: rgba(14, 165, 233, 0.55); }
 .bklit-heatmap-cell[data-level="3"] { background: rgba(14, 165, 233, 0.85); }
-.bklit-heatmap-cell[data-level="4"] { background: var(--emerald); box-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
+.bklit-heatmap-cell[data-level="4"] { background: var(--emerald); box-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
 
 /* ==========================================================================
    1. SLEEK QUANTUM LOADER
@@ -458,7 +528,7 @@ button {
   font-weight: 600;
 }
 
-/* 3D Visual Card */
+/* Interactive SVG Morphing & Motion Path Canvas Card */
 .hero-visual-card {
   position: relative;
   width: 100%;
@@ -484,6 +554,21 @@ button {
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+/* SVG Morphing Polygon Container */
+.svg-morph-wrapper {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  pointer-events: none;
+}
+
+.svg-morph-path {
+  fill: url(#morph-gradient);
+  stroke: var(--cyan);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.4));
 }
 
 .visual-badge {

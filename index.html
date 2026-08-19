@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saurabh Kumar Singh — Web3 Architect & Systems Engineer</title>
-    <meta name="description" content="Portfolio of Saurabh Kumar Singh — Web3 Architect & Full-Stack Engineer specializing in Hedera Hashgraph, EVM Smart Contracts, Rust & Decentralized Protocols." />
+    <title>Saurabh Kumar Singh — Creative Developer & Systems Engineer</title>
+    <meta name="description" content="Portfolio of Saurabh Kumar Singh — Creative Developer & Systems Engineer specializing in Hedera Hashgraph, EVM Smart Contracts, Rust & Decentralized Protocols." />
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,9 @@
   </head>
   <body>
 
+    <!-- Motion Scroll-linked Reading Progress Bar -->
+    <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+
     <!-- 1. QUANTUM LOADER -->
     <div class="loader" id="loader">
       <div class="loader-content">
@@ -27,7 +30,7 @@
           <div class="quantum-ring"></div>
           <div class="quantum-ring"></div>
         </div>
-        <div class="loader-title bklit-shimmer-text">INITIALIZING WEB3 ARCHITECTURE ENGINE</div>
+        <div class="loader-title bklit-shimmer-text">INITIALIZING SYSTEMS ENGINE</div>
       </div>
     </div>
 
@@ -41,7 +44,7 @@
 
         <nav class="nav-links">
           <a href="#projects">Selected Work</a>
-          <a href="#analytics">Live Metrics</a>
+          <a href="#analytics">Live Analytics</a>
           <a href="#about">Capabilities</a>
           <a href="#credentials">Credentials</a>
           <a href="#terminal">Terminal</a>
@@ -59,20 +62,20 @@
         </div>
       </header>
 
-      <!-- 3. HERO SECTION WITH 3D PRESENTATION & SHIMMERING TEXT -->
+      <!-- 3. HERO SECTION WITH ANIME.JS MORPHING SHAPES & MOTION PATH -->
       <section class="hero-section">
         <div class="hero-text-col">
           <div class="hero-tag">
             <span class="hero-tag-dot"></span>
-            <span>WEB3 ARCHITECT & FULL-STACK SYSTEMS ENGINEER</span>
+            <span>CREATIVE DEVELOPER & SYSTEMS ENGINEER</span>
           </div>
 
           <h1 class="hero-title">
-            Architecting <span class="bklit-shimmer-text">decentralized protocols</span> & smart contract infrastructure.
+            Designing <span class="bklit-shimmer-text">interactive protocols</span> & decentralized systems.
           </h1>
 
           <p class="hero-bio">
-            B.Tech CSE student specializing in Blockchain technology, Web3 architecture, EVM smart contract security, and Hedera Hashgraph DAG consensus systems.
+            B.Tech CSE student specializing in Blockchain technology, smart contract security, EVM tools, and Hedera Hashgraph DAG consensus systems.
           </p>
 
           <div class="hero-actions">
@@ -84,23 +87,24 @@
             </a>
           </div>
 
+          <!-- Animatable Stat Counters (Anime.js createAnimatable) -->
           <div class="hero-stats">
             <div class="stat-item">
-              <div class="stat-num">06+</div>
+              <div class="stat-num" data-value="6" data-suffix="+">0</div>
               <div class="stat-label">Public Repositories</div>
             </div>
             <div class="stat-item">
-              <div class="stat-num">100%</div>
+              <div class="stat-num" data-value="100" data-suffix="%">0</div>
               <div class="stat-label">On-Chain Focus</div>
             </div>
             <div class="stat-item">
-              <div class="stat-num">02</div>
+              <div class="stat-num" data-value="2" data-suffix="">0</div>
               <div class="stat-label">Production dApps</div>
             </div>
           </div>
         </div>
 
-        <!-- 3D Interactive Hero Card -->
+        <!-- Interactive 3D Card with Anime.js Morphing Polygon & Orbit Motion Path -->
         <div class="hero-visual-card">
           <model-viewer
             src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
@@ -113,47 +117,83 @@
           ></model-viewer>
           <canvas id="hero-canvas-fallback" class="hero-canvas-fallback"></canvas>
 
+          <!-- SVG Morphing Polygon (Anime.js morphTo) -->
+          <div class="svg-morph-wrapper">
+            <svg viewBox="0 0 240 240" style="width:100%; height:100%;">
+              <defs>
+                <linearGradient id="morph-gradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="#6366f1" stop-opacity="0.1" />
+                </linearGradient>
+              </defs>
+              <!-- Path for Motion Orbit (Anime.js createMotionPath) -->
+              <path id="orbit-svg-path" d="M 120,30 A 90,90 0 1,1 119.9,30" fill="none" stroke="rgba(14,165,233,0.15)" stroke-dasharray="4" />
+              <!-- Morphing Polygon -->
+              <polygon id="svg-morph-polygon" class="svg-morph-path" points="120,20 200,65 200,155 120,200 40,155 40,65" />
+              <!-- Motion Path Follower Node -->
+              <circle id="motion-path-follower" r="6" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)" />
+            </svg>
+          </div>
+
           <div class="visual-badge">
             <span class="brand-dot" style="width: 8px; height: 8px;"></span>
-            <span>Interactive 3D Node Simulation</span>
+            <span>Anime.js Morph & Orbit Path Simulation</span>
           </div>
         </div>
       </section>
 
-      <!-- 4. BKLIT UI ANALYTICS DASHBOARD (AREA CHART & HEATMAP) -->
+      <!-- 4. BKLIT UI FULL CHART SUITE (@bklit/area-chart, @bklit/line-chart, @bklit/heatmap-chart) -->
       <section class="section" id="analytics">
         <div class="section-header">
           <div>
             <div class="section-tag">BKLIT UI COMPONENT REGISTRY</div>
-            <h2 class="section-title">Network Metrics & Activity Charts</h2>
+            <h2 class="section-title">Network Analytics & Execution Charts</h2>
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px;">
-          <!-- Bklit Area Chart (@bklit/area-chart) -->
-          <div class="bklit-chart-container" style="margin-top: 0;">
+        <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px;">
+          <!-- Bklit Area Chart (@bklit/area-chart) & Line Chart (@bklit/line-chart) -->
+          <div class="bklit-chart-card">
+            <div class="bklit-tooltip" id="bklit-chart-tooltip"></div>
+
             <div class="bklit-chart-header">
               <div class="bklit-chart-title">
                 <span class="brand-dot" style="background: var(--primary);"></span>
-                <span>Hedera & EVM Throughput (TPS)</span>
+                <span>Hedera Consensus TPS & Multi-Chain Latency</span>
               </div>
-              <div class="bklit-chart-subtitle bklit-shimmer-text">LIVE REAL-TIME STREAM</div>
+              <div class="bklit-chart-subtitle bklit-shimmer-text">LIVE NETWORK METRICS</div>
             </div>
             
-            <svg class="bklit-area-svg" viewBox="0 0 500 180">
+            <svg class="bklit-chart-svg" viewBox="0 0 520 180">
               <defs>
-                <linearGradient id="bklit-gradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.4" />
+                <linearGradient id="bklit-area-gradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.45" />
                   <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.0" />
                 </linearGradient>
               </defs>
-              <path class="bklit-area-path" d="M 0,140 Q 60,60 120,110 T 240,40 T 360,90 T 500,30 L 500,180 L 0,180 Z" />
-              <path class="bklit-line-path" d="M 0,140 Q 60,60 120,110 T 240,40 T 360,90 T 500,30" />
+              <!-- Bklit Area Chart -->
+              <path class="bklit-area-fill" d="M 0,140 Q 65,50 130,100 T 260,35 T 390,85 T 520,25 L 520,180 L 0,180 Z" />
+              <!-- Bklit Primary Line Chart (@bklit/line-chart) -->
+              <path class="bklit-line-stroke" d="M 0,140 Q 65,50 130,100 T 260,35 T 390,85 T 520,25" />
+              <!-- Bklit Secondary Comparison Line -->
+              <path class="bklit-line-secondary" d="M 0,160 Q 65,110 130,130 T 260,80 T 390,110 T 520,70" />
+
+              <!-- Interactive Bklit Data Point Dots -->
+              <circle class="bklit-dot" cx="65" cy="85" r="5" data-value="4,250" data-time="12:00:00" />
+              <circle class="bklit-dot" cx="130" cy="100" r="5" data-value="3,800" data-time="12:05:00" />
+              <circle class="bklit-dot" cx="260" cy="35" r="5" data-value="10,400" data-time="12:10:00" />
+              <circle class="bklit-dot" cx="390" cy="85" r="5" data-value="5,120" data-time="12:15:00" />
+              <circle class="bklit-dot" cx="520" cy="25" r="5" data-value="12,850" data-time="12:20:00" />
             </svg>
+
+            <div style="display: flex; gap: 24px; margin-top: 12px; font-size: 12px; font-family: var(--font-mono); color: var(--muted);">
+              <span><span style="color: var(--primary);">●</span> Hedera Hashgraph (TPS)</span>
+              <span><span style="color: var(--emerald);">---</span> Ethereum EVM (TPS)</span>
+            </div>
           </div>
 
           <!-- Bklit Heatmap Chart (@bklit/heatmap-chart) -->
-          <div class="bklit-chart-container" style="margin-top: 0;">
+          <div class="bklit-chart-card">
             <div class="bklit-chart-header">
               <div class="bklit-chart-title">
                 <span class="brand-dot" style="background: var(--emerald);"></span>
@@ -161,12 +201,25 @@
               </div>
               <div class="bklit-chart-subtitle">Q1-Q3 2026</div>
             </div>
-            <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">
-              On-chain commit frequency & testnet deployment activity.
+            <p style="font-size: 13px; color: var(--muted); margin-bottom: 16px;">
+              On-chain commit frequency & testnet contract deployment density.
             </p>
 
-            <div class="bklit-heatmap-grid" id="bklit-heatmap">
-              <!-- Dynamically populated by assets/js/project-inventory.js -->
+            <div class="bklit-heatmap-wrapper">
+              <div class="bklit-heatmap-grid" id="bklit-heatmap">
+                <!-- Dynamically populated by assets/js/project-inventory.js -->
+              </div>
+              <div class="bklit-heatmap-legend">
+                <span>Less activity</span>
+                <div style="display:flex; gap:4px; align-items:center;">
+                  <span class="bklit-heatmap-cell" style="width:12px; height:12px;" data-level="0"></span>
+                  <span class="bklit-heatmap-cell" style="width:12px; height:12px;" data-level="1"></span>
+                  <span class="bklit-heatmap-cell" style="width:12px; height:12px;" data-level="2"></span>
+                  <span class="bklit-heatmap-cell" style="width:12px; height:12px;" data-level="3"></span>
+                  <span class="bklit-heatmap-cell" style="width:12px; height:12px;" data-level="4"></span>
+                </div>
+                <span>High activity</span>
+              </div>
             </div>
           </div>
         </div>
@@ -338,7 +391,7 @@
         <div class="contact-box">
           <h2 class="contact-title bklit-shimmer-text">Let's Build Something Great</h2>
           <p class="contact-desc">
-            Open to Web3 engineering roles, smart contract security collaborations, and protocol architecture opportunities.
+            Open to developer roles, smart contract security collaborations, and protocol architecture opportunities.
           </p>
 
           <div class="social-links">
@@ -358,27 +411,13 @@
         </div>
 
         <div class="footer-bottom">
-          © 2026 Saurabh Kumar Singh. Built with Motion, Anime.js & Bklit UI Visualizations.
+          © 2026 Saurabh Kumar Singh. Built with Anime.js v4, Motion & Bklit UI Visualizations.
         </div>
       </footer>
     </div>
 
-    <!-- Motion & Anime.js ES Modules -->
-    <script type="module">
-      import { animate, scroll, inView } from 'https://cdn.jsdelivr.net/npm/motion@latest/+esm';
-      import { animate as animeAnimate } from 'https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.es.js';
-
-      // Motion Scroll Animations
-      inView('.project-card', ({ target }) => {
-        animate(target, { opacity: [0, 1], y: [30, 0] }, { duration: 0.6, easing: [0.16, 1, 0.3, 1] });
-      });
-
-      inView('.capability-card', ({ target }) => {
-        animate(target, { opacity: [0, 1], y: [20, 0] }, { duration: 0.5 });
-      });
-    </script>
-
-    <!-- Base Scripts -->
+    <!-- Scripts -->
+    <script type="module" src="./assets/js/anime-motion-suite.js"></script>
     <script src="./assets/js/model-materials.js"></script>
     <script src="./assets/js/project-inventory.js"></script>
     <script>

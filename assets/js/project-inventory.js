@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PROJECT INVENTORY & BKLIT UI CHARTS ENGINE
+   PROJECT INVENTORY & BKLIT UI CHART SUITE
    ========================================================================== */
 
 let projectData = [];
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchProjects();
   initThemeToggle();
   initTerminal();
-  initBklitHeatmap();
+  initBklitCharts();
 });
 
 async function fetchProjects() {
@@ -18,7 +18,6 @@ async function fetchProjects() {
     projectData = data.projects || [];
     renderProjects(projectData);
     initFilters();
-    initMotionScrollObserver();
   } catch (err) {
     console.error('Failed to load project inventory:', err);
   }
@@ -63,32 +62,49 @@ function renderProjects(projects) {
   }).join('');
 }
 
-/* Motion.js Intersection Observer for Scroll Animations */
-function initMotionScrollObserver() {
-  const cards = document.querySelectorAll('.project-card');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  cards.forEach(card => observer.observe(card));
+/* Bklit UI Chart Suite (@bklit/area-chart, @bklit/line-chart, @bklit/heatmap-chart) */
+function initBklitCharts() {
+  initBklitAreaChartTooltips();
+  initBklitHeatmap();
 }
 
-/* Bklit UI Heatmap Chart Generator (@bklit/heatmap-chart) */
+function initBklitAreaChartTooltips() {
+  const dots = document.querySelectorAll('.bklit-dot');
+  const tooltip = document.getElementById('bklit-chart-tooltip');
+  if (!dots.length || !tooltip) return;
+
+  dots.forEach(dot => {
+    dot.addEventListener('mouseenter', (e) => {
+      const val = dot.getAttribute('data-value');
+      const time = dot.getAttribute('data-time');
+
+      tooltip.innerHTML = `<strong>${val} TPS</strong><br><span style="color:var(--muted); font-size:11px;">Time: ${time}</span>`;
+      tooltip.classList.add('active');
+
+      const card = dot.closest('.bklit-chart-card');
+      const cardRect = card.getBoundingClientRect();
+      const dotRect = dot.getBoundingClientRect();
+
+      tooltip.style.left = `${dotRect.left - cardRect.left + 10}px`;
+      tooltip.style.top = `${dotRect.top - cardRect.top - 45}px`;
+    });
+
+    dot.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('active');
+    });
+  });
+}
+
 function initBklitHeatmap() {
   const heatmapGrid = document.getElementById('bklit-heatmap');
   if (!heatmapGrid) return;
 
-  const totalCells = 78; // 3 months of commit activity
+  const totalCells = 84; // 12 weeks of commit activity
   let html = '';
 
   for (let i = 0; i < totalCells; i++) {
-    // Generate organic activity levels (0-4)
     const level = Math.floor(Math.random() * 5);
-    html += `<div class="bklit-heatmap-cell" data-level="${level}" title="Commit & Transaction Node #${i + 1}"></div>`;
+    html += `<div class="bklit-heatmap-cell" data-level="${level}" title="Commit & Contract Executions #${i + 1}"></div>`;
   }
 
   heatmapGrid.innerHTML = html;
@@ -135,7 +151,6 @@ function initTerminal() {
       const cmd = input.value.trim().toLowerCase();
       input.value = '';
 
-      // Print command line
       appendTerminalLine(`saurabh@web3-node:~$ ${escapeHtml(cmd)}`, 'var(--cyan)');
 
       switch (cmd) {
