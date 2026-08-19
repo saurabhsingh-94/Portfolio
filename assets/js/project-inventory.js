@@ -35,7 +35,7 @@ function renderProjects(projects) {
     const statusClass = p.status ? p.status.toLowerCase().replace(/\s+/g, '-') : 'production';
     
     return `
-      <div class="project-card visible" data-status="${statusClass}">
+      <div class="project-card" data-status="${statusClass}">
         <div class="card-top">
           <div class="card-header">
             <h3 class="card-title">${escapeHtml(p.title)}</h3>
@@ -59,6 +59,11 @@ function renderProjects(projects) {
       </div>
     `;
   }).join('');
+
+  // Re-trigger scroll observer for new elements if available
+  if (window.initAnimeOnScrollReveals) {
+    window.initAnimeOnScrollReveals();
+  }
 }
 
 function initFilters() {
